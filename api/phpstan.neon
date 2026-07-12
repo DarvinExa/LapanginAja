@@ -1,0 +1,14 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app/
+        - database/
+        - routes/
+
+    # Level 5 is a good balance for Laravel projects
+    level: 5
+
+    treatPhpDocTypesAsCertain: false
