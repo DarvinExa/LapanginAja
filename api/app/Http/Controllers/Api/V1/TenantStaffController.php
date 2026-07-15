@@ -78,13 +78,17 @@ class TenantStaffController extends Controller
     /**
      * Remove a staff member from the tenant.
      */
-    public function destroy(int $userId): JsonResponse
+    public function destroy(int $id, int $user_id): JsonResponse
     {
+        // Route memiliki dua parameter: {id} (tenant) lalu {user_id} (staff).
+        // Laravel mengoper parameter route ke method berdasarkan urutan, sehingga
+        // kedua parameter harus dideklarasikan agar $user_id menerima nilai yang
+        // benar. Tenant sendiri tetap diambil dari container melalui middleware.
         $tenant = app(Tenant::class);
 
         // Find the member record
         $member = $tenant->members()
-            ->where('user_id', $userId)
+            ->where('user_id', $user_id)
             ->where('role', TenantMemberRole::STAFF)
             ->first();
 

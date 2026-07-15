@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiClient } from '../api/client';
 import { Input } from '../components/ui/Input';
@@ -10,7 +10,7 @@ import { SoccerBall } from '@phosphor-icons/react';
 export default function Onboard() {
   const navigate = useNavigate();
   const { addToast } = useToast();
-  const { refreshProfile } = useAuth();
+  const { refreshProfile, user } = useAuth();
 
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
@@ -20,6 +20,17 @@ export default function Onboard() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  // Satu owner hanya boleh memiliki satu bisnis. Kalau akun ini sudah punya
+  // bisnis, jangan tampilkan form onboarding lagi; langsung arahkan ke
+  // dashboard bisnis yang sudah ada.
+  useEffect(() => {
+    const existingTenant =
+      user?.tenants && user.tenants.length > 0 ? user.tenants[0] : null;
+    if (existingTenant) {
+      navigate(`/admin/${existingTenant.slug}`, { replace: true });
+    }
+  }, [user, navigate]);
 
   const handleSlugify = (val: string) => {
     setName(val);
@@ -54,6 +65,15 @@ export default function Onboard() {
       // Redirect to admin dashboard of the venue
       navigate(`/admin/${slug}`);
     } catch (err: any) {
+      // Backend menolak karena akun sudah memiliki bisnis: arahkan ke dashboard.
+      if (err.response?.status === 409 && err.response?.data?.tenant?.slug) {
+        addToast(
+          err.response.data.message || 'Anda sudah memiliki bisnis.',
+          'warning'
+        );
+        navigate(`/admin/${err.response.data.tenant.slug}`, { replace: true });
+        return;
+      }
       if (err.response?.data?.errors) {
         const valErrors: Record<string, string> = {};
         Object.keys(err.response.data.errors).forEach((key) => {

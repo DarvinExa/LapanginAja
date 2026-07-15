@@ -20,7 +20,6 @@ use App\Models\TenantMember;
 use App\Models\User;
 use App\Services\DocumentService;
 use App\Services\MidtransService;
-use App\Services\WhatsAppService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Artisan;
@@ -87,7 +86,7 @@ class BookingNotificationsAndCancellationTest extends TestCase
 
         // Execute the job
         $job = new SendBookingNotifications($booking);
-        $job->handle(app(DocumentService::class), app(WhatsAppService::class));
+        $job->handle(app(DocumentService::class));
 
         // Check Mail was sent
         Mail::assertSent(BookingConfirmedMail::class, function ($mail) use ($booking) {
@@ -100,14 +99,6 @@ class BookingNotificationsAndCancellationTest extends TestCase
             'channel' => NotificationChannel::EMAIL->value,
             'type' => NotificationType::ETICKET->value,
             'recipient' => 'alice@example.com',
-            'status' => NotificationStatus::SENT->value,
-        ]);
-
-        $this->assertDatabaseHas('notifications', [
-            'booking_id' => $booking->id,
-            'channel' => NotificationChannel::WHATSAPP->value,
-            'type' => NotificationType::PAID->value,
-            'recipient' => '081234567890',
             'status' => NotificationStatus::SENT->value,
         ]);
     }
@@ -137,7 +128,7 @@ class BookingNotificationsAndCancellationTest extends TestCase
 
         $this->assertDatabaseHas('notifications', [
             'booking_id' => $booking->id,
-            'channel' => NotificationChannel::WHATSAPP->value,
+            'channel' => NotificationChannel::EMAIL->value,
             'type' => NotificationType::REMINDER->value,
             'status' => NotificationStatus::SENT->value,
         ]);

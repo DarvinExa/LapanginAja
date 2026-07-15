@@ -71,12 +71,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const register = async (data: any): Promise<User> => {
     setIsLoading(true);
     try {
+      // Registration no longer logs the user in. The account must be activated
+      // through the verification link sent to the user's email address.
       const response = await apiClient.post('/auth/register', data);
-      const { token: receivedToken, user: receivedUser } = response.data;
-      localStorage.setItem('auth_token', receivedToken);
-      setToken(receivedToken);
-      setUser(receivedUser);
-      return receivedUser;
+      return response.data.user;
     } finally {
       setIsLoading(false);
     }

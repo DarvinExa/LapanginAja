@@ -16,8 +16,8 @@ Route::prefix('v1')->group(function () {
     // Guest routes
     Route::post('/auth/register', [AuthController::class, 'register'])->middleware('throttle:register');
     Route::post('/auth/login', [AuthController::class, 'login'])->middleware('throttle:login');
-    Route::post('/auth/verify-otp', [AuthController::class, 'verifyOtp']);
-    Route::post('/auth/resend-otp', [AuthController::class, 'resendOtp']);
+    Route::post('/auth/verify-email', [AuthController::class, 'verifyEmail']);
+    Route::post('/auth/resend-verification', [AuthController::class, 'resendVerification']);
     Route::post('/auth/forgot-password', [AuthController::class, 'forgotPassword']);
     Route::post('/auth/reset-password', [AuthController::class, 'resetPassword']);
     Route::post('/webhooks/midtrans', [WebhookController::class, 'midtrans']);

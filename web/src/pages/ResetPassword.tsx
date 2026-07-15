@@ -80,7 +80,7 @@ export default function ResetPassword() {
             />
 
             <Input
-              label="Kode Verifikasi OTP"
+              label="Kode Verifikasi"
               type="text"
               required
               maxLength={6}

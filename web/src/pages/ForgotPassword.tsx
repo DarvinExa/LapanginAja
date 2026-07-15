@@ -41,7 +41,7 @@ export default function ForgotPassword() {
           Lupa Kata Sandi?
         </h2>
         <p className="mt-2 text-center text-sm text-slate-600">
-          Masukkan alamat email Anda untuk menerima kode OTP pemulihan kata sandi.
+          Masukkan alamat email Anda untuk menerima kode verifikasi pemulihan kata sandi.
         </p>
       </div>
 

@@ -30,6 +30,18 @@ class TenantController extends Controller
             abort(401, 'Unauthorized.');
         }
 
+        // Satu owner hanya boleh memiliki satu bisnis. Bila sudah punya, tolak
+        // pembuatan bisnis baru dan kembalikan bisnis yang sudah ada supaya
+        // frontend dapat mengarahkan ke dashboard-nya.
+        $existingTenant = $user->tenants()->first();
+
+        if ($existingTenant) {
+            return response()->json([
+                'message' => 'Anda sudah memiliki bisnis. Setiap akun hanya dapat memiliki satu bisnis.',
+                'tenant' => new TenantResource($existingTenant),
+            ], 409);
+        }
+
         $tenant = Tenant::create([
             'owner_id' => $user->id,
             'name' => $validated['name'],

@@ -35,7 +35,7 @@ class VerificationAndStaffTest extends TestCase
         $user = User::where('email', 'jane@example.com')->first();
         $this->assertNotNull($user);
         $this->assertFalse($user->is_verified);
-        $this->assertNotNull($user->otp_code);
+        $this->assertNotNull($user->email_verification_token);
 
         // Try logging in before verifying -> 403 needs_verification
         $loginResponse = $this->postJson('/api/v1/auth/login', [
@@ -49,12 +49,12 @@ class VerificationAndStaffTest extends TestCase
             ]);
 
         // Verify with correct OTP
-        $verifyResponse = $this->postJson('/api/v1/auth/verify-otp', [
-            'email' => 'jane@example.com',
-            'code' => $user->otp_code,
+        $verifyResponse = $this->postJson('/api/v1/auth/verify-email', [
+            'token' => $user->email_verification_token,
         ]);
 
-        $verifyResponse->assertStatus(200);
+        $verifyResponse->assertStatus(200)
+            ->assertJsonStructure(['message', 'user', 'token']);
         $this->assertTrue($user->fresh()->is_verified);
 
         // Login now works

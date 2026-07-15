@@ -9,11 +9,11 @@
         .invoice-box table { width: 100%; line-height: inherit; text-align: left; border-collapse: collapse; }
         .invoice-box table td { padding: 8px; vertical-align: top; }
         .invoice-box table tr.top table td { padding-bottom: 20px; }
-        .invoice-box table tr.top table td.title { font-size: 28px; line-height: 28px; color: #4F46E5; font-weight: bold; }
+        .invoice-box table tr.top table td.title { font-size: 28px; line-height: 28px; color: #16a34a; font-weight: bold; }
         .invoice-box table tr.information table td { padding-bottom: 40px; }
         .invoice-box table tr.heading td { background: #F3F4F6; border-bottom: 1px solid #E5E7EB; font-weight: bold; }
         .invoice-box table tr.item td { border-bottom: 1px solid #F3F4F6; }
-        .invoice-box table tr.total td.price-cell { border-top: 2px solid #E5E7EB; font-weight: bold; font-size: 16px; color: #4F46E5; }
+        .invoice-box table tr.total td.price-cell { border-top: 2px solid #E5E7EB; font-weight: bold; font-size: 16px; color: #16a34a; }
         .qr-section { margin-top: 40px; text-align: center; }
         .qr-section img { width: 120px; height: 120px; }
         .footer { margin-top: 50px; font-size: 11px; color: #9CA3AF; text-align: center; }

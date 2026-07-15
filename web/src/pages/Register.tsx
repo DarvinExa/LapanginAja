@@ -37,7 +37,7 @@ export default function Register() {
         password_confirmation: passwordConfirmation,
       });
       // Redirect to OTP verification page with email
-      navigate('/verify-otp', { state: { email } });
+      navigate('/verify-email', { state: { email } });
     } catch (err: any) {
       if (err.response?.data?.errors) {
         // Map Laravel validation errors
@@ -91,7 +91,7 @@ export default function Register() {
             />
 
             <Input
-              label="Nomor telepon (WhatsApp aktif)"
+              label="Nomor telepon"
               type="tel"
               required
               value={phone}

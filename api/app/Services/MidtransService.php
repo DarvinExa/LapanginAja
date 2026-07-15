@@ -94,6 +94,33 @@ class MidtransService
     }
 
     /**
+     * Query Midtrans for the current status of a transaction (server-to-server).
+     *
+     * Dipakai sebagai sumber kebenaran saat polling status agar aplikasi tidak
+     * sepenuhnya bergantung pada webhook, yang sering tidak sampai pada
+     * lingkungan lokal tanpa tunnel publik.
+     *
+     * @return array<string, mixed>|null
+     */
+    public function checkTransactionStatus(string $orderId): ?array
+    {
+        $serverKey = config('midtrans.server_key');
+        if (empty($serverKey) || str_contains($serverKey, 'YOUR_SANDBOX_SERVER_KEY')) {
+            return null;
+        }
+
+        try {
+            $status = Transaction::status($orderId);
+
+            return json_decode(json_encode($status), true);
+        } catch (\Throwable $e) {
+            logger()->error("Gagal cek status transaksi Midtrans untuk order {$orderId}: ".$e->getMessage());
+
+            return null;
+        }
+    }
+
+    /**
      * Request a refund on Midtrans.
      */
     public function refundTransaction(string $orderId, float $amount, string $reason): bool

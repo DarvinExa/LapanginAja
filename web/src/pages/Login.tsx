@@ -39,8 +39,8 @@ export default function Login() {
       }
     } catch (err: any) {
       if (err.response?.data?.needs_verification) {
-        addToast('Akun Anda belum diverifikasi. Silakan masukkan kode OTP.', 'warning');
-        navigate('/verify-otp', { state: { email: err.response.data.email } });
+        addToast('Akun Anda belum diverifikasi. Silakan cek email untuk tautan verifikasi.', 'warning');
+        navigate('/verify-email', { state: { email: err.response.data.email } });
         return;
       }
       setError(
@@ -82,6 +82,15 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Masukkan kata sandi"
             />
+
+            <div className="-mt-3 text-right">
+              <Link
+                to="/forgot-password"
+                className="text-xs font-semibold text-emerald-600 hover:text-emerald-700 transition-colors"
+              >
+                Lupa kata sandi?
+              </Link>
+            </div>
 
             {error && (
               <div className="rounded-lg bg-rose-50 border border-rose-100 p-3 text-xs font-semibold text-rose-700">

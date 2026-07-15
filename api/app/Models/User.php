@@ -39,8 +39,8 @@ class User extends Authenticatable
         'phone',
         'role',
         'password',
-        'otp_code',
-        'otp_expires_at',
+        'email_verification_token',
+        'email_verification_expires_at',
         'is_verified',
         'reset_password_code',
         'reset_password_expires_at',
@@ -68,7 +68,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'role' => UserRole::class,
             'is_verified' => 'boolean',
-            'otp_expires_at' => 'datetime',
+            'email_verification_expires_at' => 'datetime',
             'reset_password_expires_at' => 'datetime',
         ];
     }

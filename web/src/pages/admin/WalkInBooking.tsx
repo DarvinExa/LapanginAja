@@ -234,7 +234,7 @@ export default function WalkInBooking() {
               />
 
               <Input
-                label="Nomor WhatsApp"
+                label="Nomor telepon"
                 type="tel"
                 required
                 value={customerPhone}

@@ -140,11 +140,16 @@ class PublicBookingController extends Controller
      */
     public function paymentStatus(string $slug, string $code): JsonResponse
     {
-        $booking = Booking::where('booking_code', $code)->first();
+        $booking = Booking::with('payments')->where('booking_code', $code)->first();
 
         if (! $booking) {
             abort(404, 'Booking tidak ditemukan.');
         }
+
+        // Sumber kebenaran polling: sinkronkan langsung dari Midtrans agar tidak
+        // bergantung pada webhook yang mungkin tidak sampai di lingkungan lokal.
+        // Best-effort; tidak akan pernah melempar error keluar.
+        $this->syncBookingFromMidtrans($booking);
 
         return response()->json([
             'status' => $booking->status instanceof BookingStatus ? $booking->status->value : $booking->status,
@@ -219,6 +224,11 @@ class PublicBookingController extends Controller
      */
     public function simulatePayment(string $slug, string $code): JsonResponse
     {
+        // SECURITY: this endpoint bypasses real payment and must never be reachable in production.
+        if (app()->environment('production')) {
+            abort(404);
+        }
+
         $booking = Booking::with(['payments', 'court'])->where('booking_code', $code)->first();
 
         if (! $booking) {
@@ -256,12 +266,101 @@ class PublicBookingController extends Controller
             ]);
 
             // Dispatch notification
-            \App\Jobs\SendBookingNotifications::dispatch($booking);
+            \App\Jobs\SendBookingNotifications::dispatchSync($booking);
         });
 
         return response()->json([
             'message' => 'Simulasi pembayaran sukses berhasil diproses.',
             'booking' => new BookingResource($booking->fresh()),
         ]);
+    }
+
+    /**
+     * Sinkronkan status booking langsung dari Midtrans bila masih pending.
+     */
+    private function syncBookingFromMidtrans(Booking $booking): void
+    {
+        if (
+            $booking->status !== BookingStatus::PENDING ||
+            $booking->payment_status !== PaymentStatus::UNPAID
+        ) {
+            return;
+        }
+
+        // Best-effort: kegagalan sinkronisasi (mis. error jaringan/SSL ke
+        // Midtrans, atau transaksi Snap yang belum dibayar) tidak boleh membuat
+        // halaman booking menjadi error 500.
+        try {
+            /** @var Payment|null $payment */
+            $payment = $booking->payments()
+                ->whereNotNull('order_id')
+                ->where('transaction_status', 'pending')
+                ->latest()
+                ->first();
+
+            if (! $payment) {
+                return;
+            }
+
+            $status = $this->midtransService->checkTransactionStatus($payment->order_id);
+
+            if ($status) {
+                $this->applyMidtransStatus($booking, $payment, $status);
+            }
+        } catch (\Throwable $e) {
+            logger()->warning('Gagal sinkronisasi status booking dari Midtrans: '.$e->getMessage(), [
+                'booking_code' => $booking->booking_code,
+            ]);
+        }
+    }
+
+    /**
+     * Terapkan hasil status Midtrans ke booking dan payment (mirror logika webhook).
+     *
+     * @param  array<string, mixed>  $status
+     */
+    private function applyMidtransStatus(Booking $booking, Payment $payment, array $status): void
+    {
+        $transactionStatus = $status['transaction_status'] ?? null;
+        $fraudStatus = $status['fraud_status'] ?? null;
+
+        DB::transaction(function () use ($booking, $payment, $transactionStatus, $fraudStatus, $status) {
+            /** @var Payment $payment */
+            $payment = Payment::where('id', $payment->id)->lockForUpdate()->first();
+
+            // Idempotency: lewati bila sudah final sukses.
+            if ($payment->transaction_status === 'settlement') {
+                return;
+            }
+
+            if ($transactionStatus === 'settlement' || ($transactionStatus === 'capture' && $fraudStatus === 'accept')) {
+                $payment->update([
+                    'transaction_status' => 'settlement',
+                    'payment_type' => $status['payment_type'] ?? null,
+                    'transaction_id' => $status['transaction_id'] ?? null,
+                    'paid_at' => now(),
+                    'raw_payload' => $status,
+                ]);
+
+                $booking->update([
+                    'status' => BookingStatus::CONFIRMED,
+                    'payment_status' => PaymentStatus::PAID,
+                ]);
+
+                \App\Jobs\SendBookingNotifications::dispatchSync($booking);
+            } elseif (in_array($transactionStatus, ['expire', 'cancel', 'deny'], true)) {
+                $payment->update([
+                    'transaction_status' => $transactionStatus,
+                    'raw_payload' => $status,
+                ]);
+
+                if ($booking->status === BookingStatus::PENDING) {
+                    $booking->update([
+                        'status' => BookingStatus::CANCELLED,
+                        'payment_status' => PaymentStatus::FAILED,
+                    ]);
+                }
+            }
+        });
     }
 }

@@ -245,7 +245,7 @@ export default function StaffManagement() {
               />
 
               <Input
-                label="No. Telepon / WhatsApp"
+                label="No. Telepon"
                 type="tel"
                 required
                 value={phone}

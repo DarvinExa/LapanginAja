@@ -18,12 +18,12 @@ class BookingConfirmedMail extends Mailable
 
     public string $qrCode;
 
-    protected string $pdfData;
+    protected ?string $pdfData;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(Booking $booking, string $qrCode, string $pdfData)
+    public function __construct(Booking $booking, string $qrCode, ?string $pdfData = null)
     {
         $this->booking = $booking;
         $this->qrCode = $qrCode;
@@ -61,6 +61,10 @@ class BookingConfirmedMail extends Mailable
      */
     public function attachments(): array
     {
+        if ($this->pdfData === null) {
+            return [];
+        }
+
         return [
             Attachment::fromData(fn () => $this->pdfData, 'invoice-'.$this->booking->booking_code.'.pdf')
                 ->withMime('application/pdf'),

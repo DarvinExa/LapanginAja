@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade');
-            $table->enum('channel', ['email', 'whatsapp']);
+            $table->enum('channel', ['email']);
             $table->enum('type', ['paid', 'eticket', 'invoice', 'cancelled', 'reminder']);
             $table->enum('status', ['sent', 'failed'])->default('sent');
             $table->timestamp('created_at')->nullable();

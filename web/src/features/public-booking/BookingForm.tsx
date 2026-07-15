@@ -73,7 +73,7 @@ export const BookingForm: React.FC<BookingFormProps> = ({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
-          label="Nomor WhatsApp"
+          label="Nomor telepon"
           type="tel"
           required
           value={phone}

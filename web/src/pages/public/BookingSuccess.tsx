@@ -89,7 +89,7 @@ export default function BookingSuccess() {
           </div>
           
           <p className="text-xs text-slate-400 leading-relaxed px-2">
-            E-ticket masuk, QR code presensi, dan invoice PDF resmi telah berhasil dikirimkan ke nomor WhatsApp dan alamat email Anda.
+            E-ticket masuk, QR code presensi, dan invoice PDF resmi telah berhasil dikirimkan ke alamat email Anda.
           </p>
         </div>
 
