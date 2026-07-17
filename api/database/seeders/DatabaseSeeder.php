@@ -24,6 +24,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Idempotent: lewati jika data demo sudah ada, supaya aman
+        // dijalankan otomatis setiap container restart di production.
+        if (Tenant::query()->where('slug', 'senayan-sport')->exists()) {
+            return;
+        }
+
         // 1. Create Super Admin
         User::factory()->create([
             'name' => 'Super Admin',
