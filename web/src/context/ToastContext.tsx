@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 
-type ToastType = 'success' | 'error' | 'info' | 'warning';
+type ToastType = 'success' | 'error' | 'info';
 
 interface Toast {
   id: string;
@@ -50,8 +50,6 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                 ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
                 : toast.type === 'error'
                 ? 'bg-rose-50 text-rose-800 border-rose-200'
-                : toast.type === 'warning'
-                ? 'bg-amber-50 text-amber-800 border-amber-200'
                 : 'bg-slate-50 text-slate-800 border-slate-200'
             }`}
           >
