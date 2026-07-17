@@ -17,6 +17,7 @@ interface Tenant {
   timezone: string;
   hold_minutes: number;
   cancellation_window_hours: number;
+  max_advance_days: number;
   logo_url?: string | null;
   image_url?: string | null;
   description?: string | null;
