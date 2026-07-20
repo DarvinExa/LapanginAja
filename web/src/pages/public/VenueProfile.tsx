@@ -1,12 +1,15 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { apiClient } from '../../api/client';
-import { DatePicker } from '../../features/public-booking/DatePicker';
-import { SlotGrid, type TimeSlot } from '../../features/public-booking/SlotGrid';
-import { BookingForm } from '../../features/public-booking/BookingForm';
-import { BookingSummary } from '../../features/public-booking/BookingSummary';
-import { Skeleton } from '../../components/ui/Skeleton';
-import { useToast } from '../../context/ToastContext';
+import { useState, useEffect, useCallback } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { apiClient } from "../../api/client";
+import { DatePicker } from "../../features/public-booking/DatePicker";
+import {
+  SlotGrid,
+  type TimeSlot,
+} from "../../features/public-booking/SlotGrid";
+import { BookingForm } from "../../features/public-booking/BookingForm";
+import { BookingSummary } from "../../features/public-booking/BookingSummary";
+import { Skeleton } from "../../components/ui/Skeleton";
+import { useToast } from "../../context/ToastContext";
 
 interface Tenant {
   id: number;
@@ -17,6 +20,7 @@ interface Tenant {
   timezone: string;
   hold_minutes: number;
   cancellation_window_hours: number;
+  max_advance_days?: number;
   logo_url?: string | null;
   image_url?: string | null;
   description?: string | null;
@@ -39,7 +43,7 @@ export default function VenueProfile() {
   const [tenant, setTenant] = useState<Tenant | null>(null);
   const [courts, setCourts] = useState<Court[]>([]);
   const [selectedCourt, setSelectedCourt] = useState<Court | null>(null);
-  const [selectedDate, setSelectedDate] = useState<string>('');
+  const [selectedDate, setSelectedDate] = useState<string>("");
   const [slots, setSlots] = useState<TimeSlot[]>([]);
   const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
 
@@ -66,13 +70,13 @@ export default function VenueProfile() {
         // Default to today's date formatted as YYYY-MM-DD
         const today = new Date();
         const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, "0");
+        const dd = String(today.getDate()).padStart(2, "0");
         setSelectedDate(`${yyyy}-${mm}-${dd}`);
       } catch (err: any) {
         setError(
           err.response?.data?.message ||
-            'Gagal memuat profil venue. Pastikan alamat URL benar.'
+            "Gagal memuat profil venue. Pastikan alamat URL benar.",
         );
       } finally {
         setIsVenueLoading(false);
@@ -99,8 +103,8 @@ export default function VenueProfile() {
       setSlots(response.data.slots);
     } catch (err: any) {
       addToast(
-        err.response?.data?.message || 'Gagal mengambil jadwal ketersediaan.',
-        'error'
+        err.response?.data?.message || "Gagal mengambil jadwal ketersediaan.",
+        "error",
       );
     } finally {
       setIsSlotsLoading(false);
@@ -119,7 +123,7 @@ export default function VenueProfile() {
     notes: string;
   }) => {
     if (!selectedCourt || !selectedSlot) {
-      addToast('Silakan pilih slot waktu terlebih dahulu.', 'error');
+      addToast("Silakan pilih slot waktu terlebih dahulu.", "error");
       return;
     }
 
@@ -134,16 +138,19 @@ export default function VenueProfile() {
         notes: formData.notes,
       };
 
-      const response = await apiClient.post(`/public/${slug}/bookings`, payload);
+      const response = await apiClient.post(
+        `/public/${slug}/bookings`,
+        payload,
+      );
       const booking = response.data.booking;
 
-      addToast('Pemesanan berhasil dibuat!', 'success');
+      addToast("Pemesanan berhasil dibuat!", "success");
       // Redirect to payment details (Batch 8 task flow)
       navigate(`/${slug}/bookings/${booking.booking_code}`);
     } catch (err: any) {
       addToast(
-        err.response?.data?.message || 'Gagal memproses pembuatan booking.',
-        'error'
+        err.response?.data?.message || "Gagal memproses pembuatan booking.",
+        "error",
       );
     } finally {
       setIsSubmitting(false);
@@ -167,8 +174,12 @@ export default function VenueProfile() {
     return (
       <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center p-4">
         <div className="bg-[#FDFBF7] border border-[#064E3B] p-8 rounded-none max-w-md w-full text-center shadow-[4px_4px_0_#064E3B]">
-          <div className="text-rose-500 font-bold text-lg mb-2">Terjadi Kesalahan</div>
-          <p className="text-[#064E3B]/80 text-sm mb-6">{error || 'Venue tidak ditemukan'}</p>
+          <div className="text-rose-500 font-bold text-lg mb-2">
+            Terjadi Kesalahan
+          </div>
+          <p className="text-[#064E3B]/80 text-sm mb-6">
+            {error || "Venue tidak ditemukan"}
+          </p>
           <button
             onClick={() => window.location.reload()}
             className="px-4 py-2 bg-[#10B981] hover:bg-[#064E3B] text-white rounded-none text-sm font-medium transition-colors"
@@ -186,12 +197,12 @@ export default function VenueProfile() {
         {/* Custom Venue Banner Cover */}
         {tenant.image_url && (
           <div className="w-full h-48 sm:h-64 rounded-none overflow-hidden border border-[#064E3B] shadow-[4px_4px_0_#064E3B] relative bg-slate-100">
-            <img 
-              src={tenant.image_url} 
-              alt={tenant.name} 
-              className="w-full h-full object-cover" 
+            <img
+              src={tenant.image_url}
+              alt={tenant.name}
+              className="w-full h-full object-cover"
               onError={(e) => {
-                e.currentTarget.style.display = 'none';
+                e.currentTarget.style.display = "none";
               }}
             />
           </div>
@@ -202,18 +213,20 @@ export default function VenueProfile() {
           <div className="flex items-center gap-4">
             {tenant.logo_url && (
               <div className="h-16 w-16 rounded-full overflow-hidden border border-[#064E3B] shrink-0 bg-[#FDFBF7] flex items-center justify-center">
-                <img 
-                  src={tenant.logo_url} 
-                  alt="Logo" 
+                <img
+                  src={tenant.logo_url}
+                  alt="Logo"
                   className="h-full w-full object-contain"
                   onError={(e) => {
-                    e.currentTarget.style.display = 'none';
+                    e.currentTarget.style.display = "none";
                   }}
                 />
               </div>
             )}
             <div>
-              <h1 className="text-2xl font-bold text-[#064E3B]">{tenant.name}</h1>
+              <h1 className="text-2xl font-bold text-[#064E3B]">
+                {tenant.name}
+              </h1>
               <p className="text-sm text-[#064E3B]/65 mt-1">{tenant.address}</p>
             </div>
           </div>
@@ -226,17 +239,21 @@ export default function VenueProfile() {
 
           <div className="flex gap-4 pt-3 border-t border-[#064E3B] text-xs text-[#064E3B]/80">
             <div>
-              <span className="font-semibold text-[#064E3B]">Telepon:</span> {tenant.phone}
+              <span className="font-semibold text-[#064E3B]">Telepon:</span>{" "}
+              {tenant.phone}
             </div>
             <div>
-              <span className="font-semibold text-[#064E3B]">Zona Waktu:</span> {tenant.timezone}
+              <span className="font-semibold text-[#064E3B]">Zona Waktu:</span>{" "}
+              {tenant.timezone}
             </div>
           </div>
         </div>
 
         {/* Court Tabs Selector */}
         <div className="flex flex-col gap-2">
-          <span className="text-sm font-semibold text-[#064E3B]">Pilih Lapangan</span>
+          <span className="text-sm font-semibold text-[#064E3B]">
+            Pilih Lapangan
+          </span>
           <div className="flex gap-2 overflow-x-auto pb-1">
             {courts.map((court) => {
               const isSelected = selectedCourt?.id === court.id;
@@ -247,14 +264,14 @@ export default function VenueProfile() {
                   onClick={() => setSelectedCourt(court)}
                   className={`px-4 py-2 rounded-none text-sm font-semibold border transition-all duration-200 cursor-pointer ${
                     isSelected
-                      ? 'bg-[#10B981] border-[#064E3B] text-white shadow-[4px_4px_0_#064E3B]'
-                      : 'bg-[#FDFBF7] border-[#064E3B] text-[#064E3B]/80 hover:bg-[#FDFBF7]'
+                      ? "bg-[#10B981] border-[#064E3B] text-white shadow-[4px_4px_0_#064E3B]"
+                      : "bg-[#FDFBF7] border-[#064E3B] text-[#064E3B]/80 hover:bg-[#FDFBF7]"
                   }`}
                 >
                   {court.name}
                   <span
                     className={`text-xxs font-normal ml-1.5 ${
-                      isSelected ? 'text-[#FDFBF7]' : 'text-[#064E3B]/45'
+                      isSelected ? "text-[#FDFBF7]" : "text-[#064E3B]/45"
                     }`}
                   >
                     ({court.sport_type})
@@ -269,7 +286,7 @@ export default function VenueProfile() {
         <DatePicker
           selectedDate={selectedDate}
           onChange={setSelectedDate}
-          maxAdvanceDays={tenant.max_advance_days}
+          maxAdvanceDays={tenant.max_advance_days ?? 30}
         />
 
         {/* Slots Grid */}
@@ -286,12 +303,15 @@ export default function VenueProfile() {
             <div className="md:col-span-1">
               <BookingSummary
                 selectedSlot={selectedSlot}
-                courtName={selectedCourt?.name || ''}
+                courtName={selectedCourt?.name || ""}
                 date={selectedDate}
               />
             </div>
             <div className="md:col-span-2 bg-[#FDFBF7] border border-[#064E3B] rounded-none p-5 shadow-[4px_4px_0_#064E3B]">
-              <BookingForm onSubmit={handleBookingSubmit} isLoading={isSubmitting} />
+              <BookingForm
+                onSubmit={handleBookingSubmit}
+                isLoading={isSubmitting}
+              />
             </div>
           </div>
         )}
