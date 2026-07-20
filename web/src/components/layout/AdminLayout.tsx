@@ -83,11 +83,11 @@ export default function AdminLayout() {
   };
 
   return (
-    <div className="flex h-screen bg-slate-50 overflow-hidden font-sans">
+    <div className="flex h-screen bg-[#FDFBF7] overflow-hidden font-sans">
       {/* Sidebar for Desktop */}
-      <aside className="hidden md:flex flex-col w-64 bg-white border-r border-slate-200 shrink-0">
-        <div className="h-16 flex items-center px-6 border-b border-slate-100 bg-slate-50/50">
-          <span className="text-sm font-black text-slate-800 tracking-wide uppercase truncate">
+      <aside className="hidden md:flex flex-col w-64 bg-[#FDFBF7] border-r border-[#064E3B] shrink-0">
+        <div className="h-16 flex items-center px-6 border-b border-[#064E3B] bg-[#FDFBF7]/50">
+          <span className="text-sm font-black text-[#064E3B] tracking-wide uppercase truncate">
             {tenantName}
           </span>
         </div>
@@ -101,10 +101,10 @@ export default function AdminLayout() {
               <Link
                 key={item.label}
                 to={item.path}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-none text-sm font-semibold transition-all duration-200 ${
                   active
-                    ? 'bg-emerald-600 text-white shadow-sm'
-                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                    ? 'bg-[#10B981] text-white shadow-[4px_4px_0_#064E3B]'
+                    : 'text-[#064E3B]/80 hover:bg-[#FDFBF7] hover:text-[#064E3B]'
                 }`}
               >
                 <Icon size={20} weight={active ? 'bold' : 'regular'} />
@@ -114,16 +114,16 @@ export default function AdminLayout() {
           })}
         </nav>
 
-        <div className="p-4 border-t border-slate-100 flex flex-col gap-2.5">
+        <div className="p-4 border-t border-[#064E3B] flex flex-col gap-2.5">
           <div className="px-4 py-1.5 flex flex-col">
-            <span className="text-xs font-bold text-slate-800">{user?.name}</span>
-            <span className="text-xxs text-slate-400 font-medium capitalize mt-0.5">
+            <span className="text-xs font-bold text-[#064E3B]">{user?.name}</span>
+            <span className="text-xxs text-[#064E3B]/45 font-medium capitalize mt-0.5">
               {user?.role}
             </span>
           </div>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-rose-600 hover:bg-rose-50 hover:text-rose-700 transition-all duration-200 text-left w-full cursor-pointer focus:outline-none"
+            className="flex items-center gap-3 px-4 py-3 rounded-none text-sm font-semibold text-rose-600 hover:bg-rose-50 hover:text-rose-700 transition-all duration-200 text-left w-full cursor-pointer focus:outline-none"
           >
             <SignOut size={20} />
             <span>Keluar</span>
@@ -136,19 +136,19 @@ export default function AdminLayout() {
         <div className="fixed inset-0 z-40 md:hidden flex">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"
+            className="fixed inset-0 bg-[#064E3B]/60  transition-opacity"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
           {/* Menu Panel */}
-          <div className="relative flex flex-col w-64 max-w-xs bg-white h-full border-r border-slate-200 z-10 animate-slide-in">
-            <div className="h-16 flex items-center justify-between px-6 border-b border-slate-100 bg-slate-50/50">
-              <span className="text-sm font-black text-slate-800 tracking-wide uppercase truncate">
+          <div className="relative flex flex-col w-64 max-w-xs bg-[#FDFBF7] h-full border-r border-[#064E3B] z-10 animate-slide-in">
+            <div className="h-16 flex items-center justify-between px-6 border-b border-[#064E3B] bg-[#FDFBF7]/50">
+              <span className="text-sm font-black text-[#064E3B] tracking-wide uppercase truncate">
                 {tenantName}
               </span>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-slate-500 hover:text-slate-700 focus:outline-none"
+                className="text-[#064E3B]/65 hover:text-[#064E3B] focus:outline-none"
               >
                 <X size={20} />
               </button>
@@ -164,10 +164,10 @@ export default function AdminLayout() {
                     key={item.label}
                     to={item.path}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                    className={`flex items-center gap-3 px-4 py-3 rounded-none text-sm font-semibold transition-all duration-200 ${
                       active
-                        ? 'bg-emerald-600 text-white shadow-sm'
-                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                        ? 'bg-[#10B981] text-white shadow-[4px_4px_0_#064E3B]'
+                        : 'text-[#064E3B]/80 hover:bg-[#FDFBF7] hover:text-[#064E3B]'
                     }`}
                   >
                     <Icon size={20} weight={active ? 'bold' : 'regular'} />
@@ -177,16 +177,16 @@ export default function AdminLayout() {
               })}
             </nav>
 
-            <div className="p-4 border-t border-slate-100 flex flex-col gap-2.5">
+            <div className="p-4 border-t border-[#064E3B] flex flex-col gap-2.5">
               <div className="px-4 py-1.5 flex flex-col">
-                <span className="text-xs font-bold text-slate-800">{user?.name}</span>
-                <span className="text-xxs text-slate-400 capitalize mt-0.5">
+                <span className="text-xs font-bold text-[#064E3B]">{user?.name}</span>
+                <span className="text-xxs text-[#064E3B]/45 capitalize mt-0.5">
                   {user?.role}
                 </span>
               </div>
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-rose-600 hover:bg-rose-50 hover:text-rose-700 transition-all duration-200 text-left w-full cursor-pointer focus:outline-none"
+                className="flex items-center gap-3 px-4 py-3 rounded-none text-sm font-semibold text-rose-600 hover:bg-rose-50 hover:text-rose-700 transition-all duration-200 text-left w-full cursor-pointer focus:outline-none"
               >
                 <SignOut size={20} />
                 <span>Keluar</span>
@@ -199,14 +199,14 @@ export default function AdminLayout() {
       {/* Main Content Area */}
       <div className="flex flex-col flex-1 overflow-hidden">
         {/* Top Header */}
-        <header className="h-16 flex items-center justify-between px-6 bg-white border-b border-slate-200 shrink-0">
+        <header className="h-16 flex items-center justify-between px-6 bg-[#FDFBF7] border-b border-[#064E3B] shrink-0">
           <button
             onClick={() => setIsMobileMenuOpen(true)}
-            className="md:hidden text-slate-600 hover:text-slate-800 focus:outline-none"
+            className="md:hidden text-[#064E3B]/80 hover:text-[#064E3B] focus:outline-none"
           >
             <List size={24} />
           </button>
-          <div className="text-sm font-semibold text-slate-800 capitalize md:ml-0 ml-4">
+          <div className="text-sm font-semibold text-[#064E3B] capitalize md:ml-0 ml-4">
             Kelola Operasional Venue
           </div>
         </header>

@@ -152,12 +152,12 @@ export default function VenueProfile() {
 
   if (isVenueLoading) {
     return (
-      <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-[#FDFBF7] py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto flex flex-col gap-6">
-          <Skeleton className="h-32 w-full rounded-xl" />
-          <Skeleton className="h-10 w-48 rounded-lg" />
-          <Skeleton className="h-20 w-full rounded-xl" />
-          <Skeleton className="h-60 w-full rounded-xl" />
+          <Skeleton className="h-32 w-full rounded-none" />
+          <Skeleton className="h-10 w-48 rounded-none" />
+          <Skeleton className="h-20 w-full rounded-none" />
+          <Skeleton className="h-60 w-full rounded-none" />
         </div>
       </div>
     );
@@ -165,13 +165,13 @@ export default function VenueProfile() {
 
   if (error || !tenant) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-        <div className="bg-white border border-slate-200 p-8 rounded-xl max-w-md w-full text-center shadow-sm">
+      <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center p-4">
+        <div className="bg-[#FDFBF7] border border-[#064E3B] p-8 rounded-none max-w-md w-full text-center shadow-[4px_4px_0_#064E3B]">
           <div className="text-rose-500 font-bold text-lg mb-2">Terjadi Kesalahan</div>
-          <p className="text-slate-600 text-sm mb-6">{error || 'Venue tidak ditemukan'}</p>
+          <p className="text-[#064E3B]/80 text-sm mb-6">{error || 'Venue tidak ditemukan'}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium transition-colors"
+            className="px-4 py-2 bg-[#10B981] hover:bg-[#064E3B] text-white rounded-none text-sm font-medium transition-colors"
           >
             Coba Lagi
           </button>
@@ -181,11 +181,11 @@ export default function VenueProfile() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#FDFBF7] py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto flex flex-col gap-6">
         {/* Custom Venue Banner Cover */}
         {tenant.image_url && (
-          <div className="w-full h-48 sm:h-64 rounded-xl overflow-hidden border border-slate-200 shadow-sm relative bg-slate-100">
+          <div className="w-full h-48 sm:h-64 rounded-none overflow-hidden border border-[#064E3B] shadow-[4px_4px_0_#064E3B] relative bg-slate-100">
             <img 
               src={tenant.image_url} 
               alt={tenant.name} 
@@ -198,10 +198,10 @@ export default function VenueProfile() {
         )}
 
         {/* Venue Header */}
-        <div className="bg-white border border-slate-200 p-6 rounded-xl shadow-sm flex flex-col gap-4">
+        <div className="bg-[#FDFBF7] border border-[#064E3B] p-6 rounded-none shadow-[4px_4px_0_#064E3B] flex flex-col gap-4">
           <div className="flex items-center gap-4">
             {tenant.logo_url && (
-              <div className="h-16 w-16 rounded-full overflow-hidden border border-slate-200 shrink-0 bg-slate-50 flex items-center justify-center">
+              <div className="h-16 w-16 rounded-full overflow-hidden border border-[#064E3B] shrink-0 bg-[#FDFBF7] flex items-center justify-center">
                 <img 
                   src={tenant.logo_url} 
                   alt="Logo" 
@@ -213,30 +213,30 @@ export default function VenueProfile() {
               </div>
             )}
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">{tenant.name}</h1>
-              <p className="text-sm text-slate-500 mt-1">{tenant.address}</p>
+              <h1 className="text-2xl font-bold text-[#064E3B]">{tenant.name}</h1>
+              <p className="text-sm text-[#064E3B]/65 mt-1">{tenant.address}</p>
             </div>
           </div>
 
           {tenant.description && (
-            <p className="text-xs text-slate-600 leading-relaxed border-t border-slate-50 pt-3">
+            <p className="text-xs text-[#064E3B]/80 leading-relaxed border-t border-slate-50 pt-3">
               {tenant.description}
             </p>
           )}
 
-          <div className="flex gap-4 pt-3 border-t border-slate-100 text-xs text-slate-600">
+          <div className="flex gap-4 pt-3 border-t border-[#064E3B] text-xs text-[#064E3B]/80">
             <div>
-              <span className="font-semibold text-slate-700">Telepon:</span> {tenant.phone}
+              <span className="font-semibold text-[#064E3B]">Telepon:</span> {tenant.phone}
             </div>
             <div>
-              <span className="font-semibold text-slate-700">Zona Waktu:</span> {tenant.timezone}
+              <span className="font-semibold text-[#064E3B]">Zona Waktu:</span> {tenant.timezone}
             </div>
           </div>
         </div>
 
         {/* Court Tabs Selector */}
         <div className="flex flex-col gap-2">
-          <span className="text-sm font-semibold text-slate-800">Pilih Lapangan</span>
+          <span className="text-sm font-semibold text-[#064E3B]">Pilih Lapangan</span>
           <div className="flex gap-2 overflow-x-auto pb-1">
             {courts.map((court) => {
               const isSelected = selectedCourt?.id === court.id;
@@ -245,16 +245,16 @@ export default function VenueProfile() {
                   key={court.id}
                   type="button"
                   onClick={() => setSelectedCourt(court)}
-                  className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-all duration-200 cursor-pointer ${
+                  className={`px-4 py-2 rounded-none text-sm font-semibold border transition-all duration-200 cursor-pointer ${
                     isSelected
-                      ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm'
-                      : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                      ? 'bg-[#10B981] border-[#064E3B] text-white shadow-[4px_4px_0_#064E3B]'
+                      : 'bg-[#FDFBF7] border-[#064E3B] text-[#064E3B]/80 hover:bg-[#FDFBF7]'
                   }`}
                 >
                   {court.name}
                   <span
                     className={`text-xxs font-normal ml-1.5 ${
-                      isSelected ? 'text-emerald-100' : 'text-slate-400'
+                      isSelected ? 'text-[#FDFBF7]' : 'text-[#064E3B]/45'
                     }`}
                   >
                     ({court.sport_type})
@@ -290,7 +290,7 @@ export default function VenueProfile() {
                 date={selectedDate}
               />
             </div>
-            <div className="md:col-span-2 bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+            <div className="md:col-span-2 bg-[#FDFBF7] border border-[#064E3B] rounded-none p-5 shadow-[4px_4px_0_#064E3B]">
               <BookingForm onSubmit={handleBookingSubmit} isLoading={isSubmitting} />
             </div>
           </div>

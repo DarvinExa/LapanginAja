@@ -94,7 +94,7 @@ export default function DashboardOverview() {
     return (
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {Array.from({ length: 4 }).map((_, i) => (
-          <Skeleton key={i} className="h-32 w-full rounded-xl" />
+          <Skeleton key={i} className="h-32 w-full rounded-none" />
         ))}
       </div>
     );
@@ -106,45 +106,45 @@ export default function DashboardOverview() {
     <div className="flex flex-col gap-6">
       
       {/* Date Filter Panel */}
-      <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm flex flex-wrap items-center justify-between gap-4">
+      <div className="bg-[#FDFBF7] border border-[#064E3B] p-4 rounded-none shadow-[4px_4px_0_#064E3B] flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 className="text-base font-bold text-slate-800">Statistik Operasional</h2>
-          <p className="text-xxs text-slate-400 font-medium">Lihat okupansi dan performa keuangan venue Anda</p>
+          <h2 className="text-base font-bold text-[#064E3B]">Statistik Operasional</h2>
+          <p className="text-xxs text-[#064E3B]/45 font-medium">Lihat okupansi dan performa keuangan venue Anda</p>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-slate-500">Mulai:</span>
+            <span className="text-xs font-semibold text-[#064E3B]/65">Mulai:</span>
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500"
+              className="px-2.5 py-1.5 text-xs border border-[#064E3B] rounded-none focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-[#064E3B]"
             />
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-slate-500">Sampai:</span>
+            <span className="text-xs font-semibold text-[#064E3B]/65">Sampai:</span>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="px-2.5 py-1.5 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500"
+              className="px-2.5 py-1.5 text-xs border border-[#064E3B] rounded-none focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-[#064E3B]"
             />
           </div>
         </div>
       </div>
 
       {/* Promotion Link Card */}
-      <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shadow-xs">
+      <div className="bg-[#10B981]/15 border border-[#064E3B] rounded-none p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shadow-xs">
         <div className="flex flex-col gap-0.5">
-          <span className="text-xs font-bold text-emerald-800">Link Pemesanan Publik</span>
-          <span className="text-xxs text-emerald-600">Bagikan tautan ini ke pelanggan untuk melakukan booking online</span>
-          <span className="text-xs font-semibold text-slate-700 bg-white/75 border border-emerald-100 rounded-md py-1.5 px-3 mt-1.5 w-fit select-all break-all">
+          <span className="text-xs font-bold text-[#064E3B]">Link Pemesanan Publik</span>
+          <span className="text-xxs text-[#10B981]">Bagikan tautan ini ke pelanggan untuk melakukan booking online</span>
+          <span className="text-xs font-semibold text-[#064E3B] bg-[#FDFBF7]/75 border border-[#064E3B] rounded-none py-1.5 px-3 mt-1.5 w-fit select-all break-all">
             {window.location.origin}/{slug}
           </span>
         </div>
         <Button
           variant="secondary"
-          className="bg-white border-emerald-200 hover:bg-emerald-100 text-emerald-800 text-xs py-2 px-4 h-fit shrink-0 justify-center font-bold"
+          className="bg-[#FDFBF7] border-[#064E3B] hover:bg-[#10B981]/25 text-[#064E3B] text-xs py-2 px-4 h-fit shrink-0 justify-center font-bold"
           onClick={() => {
             navigator.clipboard.writeText(`${window.location.origin}/${slug}`);
             addToast('Link pemesanan berhasil disalin!', 'success');
@@ -158,59 +158,59 @@ export default function DashboardOverview() {
       {isLoadingStats || !stats ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {Array.from({ length: 4 }).map((_, i) => (
-            <Skeleton key={i} className="h-32 w-full rounded-xl" />
+            <Skeleton key={i} className="h-32 w-full rounded-none" />
           ))}
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           
           {/* Card 1: Revenue */}
-          <div className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm flex items-center gap-4">
-            <div className="p-3 bg-emerald-50 rounded-lg text-emerald-600">
+          <div className="bg-[#FDFBF7] border border-[#064E3B] p-5 rounded-none shadow-[4px_4px_0_#064E3B] flex items-center gap-4">
+            <div className="p-3 bg-[#10B981]/15 rounded-none text-[#10B981]">
               <CurrencyDollar size={24} weight="duotone" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xxs font-bold text-slate-400 uppercase tracking-wider">Total Pendapatan</span>
-              <span className="text-xl font-extrabold text-slate-800 mt-0.5">
+              <span className="text-xxs font-bold text-[#064E3B]/45 uppercase tracking-wider">Total Pendapatan</span>
+              <span className="text-xl font-extrabold text-[#064E3B] mt-0.5">
                 {formatRupiah(stats.revenue)}
               </span>
             </div>
           </div>
 
           {/* Card 2: Occupancy Rate */}
-          <div className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm flex items-center gap-4">
-            <div className="p-3 bg-orange-50 rounded-lg text-orange-500">
+          <div className="bg-[#FDFBF7] border border-[#064E3B] p-5 rounded-none shadow-[4px_4px_0_#064E3B] flex items-center gap-4">
+            <div className="p-3 bg-[#10B981]/15 rounded-none text-[#064E3B]">
               <Percent size={24} weight="duotone" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xxs font-bold text-slate-400 uppercase tracking-wider">Tingkat Okupansi</span>
-              <span className="text-xl font-extrabold text-slate-800 mt-0.5">
+              <span className="text-xxs font-bold text-[#064E3B]/45 uppercase tracking-wider">Tingkat Okupansi</span>
+              <span className="text-xl font-extrabold text-[#064E3B] mt-0.5">
                 {stats.occupancy_rate}%
               </span>
             </div>
           </div>
 
           {/* Card 3: Booked Hours */}
-          <div className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm flex items-center gap-4">
-            <div className="p-3 bg-indigo-50 rounded-lg text-indigo-500">
+          <div className="bg-[#FDFBF7] border border-[#064E3B] p-5 rounded-none shadow-[4px_4px_0_#064E3B] flex items-center gap-4">
+            <div className="p-3 bg-indigo-50 rounded-none text-indigo-500">
               <Clock size={24} weight="duotone" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xxs font-bold text-slate-400 uppercase tracking-wider">Durasi Terpesan</span>
-              <span className="text-xl font-extrabold text-slate-800 mt-0.5">
+              <span className="text-xxs font-bold text-[#064E3B]/45 uppercase tracking-wider">Durasi Terpesan</span>
+              <span className="text-xl font-extrabold text-[#064E3B] mt-0.5">
                 {stats.booked_hours} Jam
               </span>
             </div>
           </div>
 
           {/* Card 4: Active Courts */}
-          <div className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm flex items-center gap-4">
-            <div className="p-3 bg-sky-50 rounded-lg text-sky-500">
+          <div className="bg-[#FDFBF7] border border-[#064E3B] p-5 rounded-none shadow-[4px_4px_0_#064E3B] flex items-center gap-4">
+            <div className="p-3 bg-sky-50 rounded-none text-sky-500">
               <TennisBall size={24} weight="duotone" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xxs font-bold text-slate-400 uppercase tracking-wider">Lapangan Aktif</span>
-              <span className="text-xl font-extrabold text-slate-800 mt-0.5">
+              <span className="text-xxs font-bold text-[#064E3B]/45 uppercase tracking-wider">Lapangan Aktif</span>
+              <span className="text-xl font-extrabold text-[#064E3B] mt-0.5">
                 {stats.courts_count} Lapangan
               </span>
             </div>

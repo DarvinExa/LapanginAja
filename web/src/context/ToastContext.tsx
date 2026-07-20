@@ -45,18 +45,18 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className={`pointer-events-auto flex items-center justify-between gap-3 px-4 py-3 rounded-lg shadow-md border text-sm font-medium transition-all duration-300 ${
+            className={`pointer-events-auto flex items-center justify-between gap-3 px-4 py-3 rounded-none shadow-[4px_4px_0_#064E3B] border text-sm font-medium transition-all duration-300 ${
               toast.type === 'success'
-                ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                ? 'bg-[#10B981]/15 text-[#064E3B] border-[#064E3B]'
                 : toast.type === 'error'
                 ? 'bg-rose-50 text-rose-800 border-rose-200'
-                : 'bg-slate-50 text-slate-800 border-slate-200'
+                : 'bg-[#FDFBF7] text-[#064E3B] border-[#064E3B]'
             }`}
           >
             <span>{toast.message}</span>
             <button
               onClick={() => setToasts((prev) => prev.filter((t) => t.id !== toast.id))}
-              className="text-slate-400 hover:text-slate-600 focus:outline-none"
+              className="text-[#064E3B]/45 hover:text-[#064E3B]/80 focus:outline-none"
             >
               ×
             </button>

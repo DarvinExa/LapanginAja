@@ -99,12 +99,12 @@ export default function BookingCalendar() {
     <div className="flex flex-col gap-6">
       
       {/* Court Filter Header */}
-      <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-[#FDFBF7] border border-[#064E3B] p-4 rounded-none shadow-[4px_4px_0_#064E3B] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <Calendar size={24} className="text-emerald-600" />
+          <Calendar size={24} className="text-[#10B981]" />
           <div>
-            <h2 className="text-base font-bold text-slate-800">Kalender Penjadwalan</h2>
-            <p className="text-xxs text-slate-400 font-medium">Monitoring ketersediaan slot harian venue</p>
+            <h2 className="text-base font-bold text-[#064E3B]">Kalender Penjadwalan</h2>
+            <p className="text-xxs text-[#064E3B]/45 font-medium">Monitoring ketersediaan slot harian venue</p>
           </div>
         </div>
         
@@ -116,10 +116,10 @@ export default function BookingCalendar() {
               <button
                 key={court.id}
                 onClick={() => setSelectedCourt(court)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all duration-200 cursor-pointer ${
+                className={`px-3 py-1.5 rounded-none text-xs font-semibold border transition-all duration-200 cursor-pointer ${
                   isSelected
-                    ? 'bg-emerald-600 border-emerald-600 text-white'
-                    : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                    ? 'bg-[#10B981] border-[#064E3B] text-white'
+                    : 'bg-[#FDFBF7] border-[#064E3B] text-[#064E3B]/80 hover:bg-[#FDFBF7]'
                 }`}
               >
                 {court.name}
@@ -137,9 +137,9 @@ export default function BookingCalendar() {
       />
 
       {/* Slots Timeline list */}
-      <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
-        <div className="px-5 py-4 border-b border-slate-100 bg-slate-50/50">
-          <h3 className="text-sm font-bold text-slate-800">
+      <div className="bg-[#FDFBF7] border border-[#064E3B] rounded-none shadow-[4px_4px_0_#064E3B] overflow-hidden">
+        <div className="px-5 py-4 border-b border-[#064E3B] bg-[#FDFBF7]/50">
+          <h3 className="text-sm font-bold text-[#064E3B]">
             Jadwal Slot Lapangan: {selectedCourt?.name}
           </h3>
         </div>
@@ -148,11 +148,11 @@ export default function BookingCalendar() {
           {isLoadingSlots ? (
             <div className="flex flex-col gap-3">
               {Array.from({ length: 5 }).map((_, i) => (
-                <Skeleton key={i} className="h-12 w-full rounded-lg" />
+                <Skeleton key={i} className="h-12 w-full rounded-none" />
               ))}
             </div>
           ) : slots.length === 0 ? (
-            <div className="text-center py-8 text-slate-500 text-sm">
+            <div className="text-center py-8 text-[#064E3B]/65 text-sm">
               Tidak ada jadwal operasional aktif pada tanggal ini.
             </div>
           ) : (
@@ -162,18 +162,18 @@ export default function BookingCalendar() {
                 return (
                   <div
                     key={index}
-                    className={`flex items-center justify-between p-3.5 border rounded-lg transition-all duration-150 ${
+                    className={`flex items-center justify-between p-3.5 border rounded-none transition-all duration-150 ${
                       booked
-                        ? 'bg-slate-50 border-slate-200'
-                        : 'bg-emerald-50/10 border-emerald-100 hover:bg-emerald-50/20'
+                        ? 'bg-[#FDFBF7] border-[#064E3B]'
+                        : 'bg-[#10B981]/10 border-[#064E3B] hover:bg-[#FDFBF7]'
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <SoccerBall
                         size={20}
-                        className={booked ? 'text-slate-400' : 'text-emerald-500'}
+                        className={booked ? 'text-[#064E3B]/45' : 'text-[#10B981]'}
                       />
-                      <span className={`text-sm font-bold ${booked ? 'text-slate-500' : 'text-slate-800'}`}>
+                      <span className={`text-sm font-bold ${booked ? 'text-[#064E3B]/65' : 'text-[#064E3B]'}`}>
                         {slot.start_time} - {slot.end_time}
                       </span>
                     </div>

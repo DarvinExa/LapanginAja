@@ -205,10 +205,10 @@ export default function BookingCheckout() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-[#FDFBF7] py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md mx-auto flex flex-col gap-6">
-          <Skeleton className="h-40 w-full rounded-xl" />
-          <Skeleton className="h-60 w-full rounded-xl" />
+          <Skeleton className="h-40 w-full rounded-none" />
+          <Skeleton className="h-60 w-full rounded-none" />
         </div>
       </div>
     );
@@ -216,10 +216,10 @@ export default function BookingCheckout() {
 
   if (!booking) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-        <div className="bg-white border border-slate-200 p-8 rounded-xl max-w-md w-full text-center shadow-sm">
+      <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center p-4">
+        <div className="bg-[#FDFBF7] border border-[#064E3B] p-8 rounded-none max-w-md w-full text-center shadow-[4px_4px_0_#064E3B]">
           <h3 className="text-rose-500 font-bold text-lg mb-2">Booking Tidak Ditemukan</h3>
-          <p className="text-slate-600 text-sm mb-6">
+          <p className="text-[#064E3B]/80 text-sm mb-6">
             Kode booking yang Anda cari salah atau tidak terdaftar.
           </p>
           <Button onClick={() => navigate('/')} className="w-full justify-center">
@@ -233,12 +233,12 @@ export default function BookingCheckout() {
   // Local formatters removed (using shared utils)
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#FDFBF7] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md mx-auto flex flex-col gap-6">
         
         {/* Countdown Header */}
         {booking.status === 'pending' && !isExpired && (
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 shadow-sm text-center flex flex-col items-center gap-1 animate-pulse">
+          <div className="bg-amber-50 border border-amber-200 rounded-none p-5 shadow-[4px_4px_0_#064E3B] text-center flex flex-col items-center gap-1 animate-pulse">
             <div className="flex items-center gap-1.5 text-amber-800 font-semibold text-xs uppercase tracking-wider">
               <Clock size={16} />
               Selesaikan Pembayaran Dalam
@@ -250,7 +250,7 @@ export default function BookingCheckout() {
         )}
 
         {isExpired && (
-          <div className="bg-rose-50 border border-rose-200 rounded-xl p-5 shadow-sm text-center flex flex-col items-center gap-1">
+          <div className="bg-rose-50 border border-rose-200 rounded-none p-5 shadow-[4px_4px_0_#064E3B] text-center flex flex-col items-center gap-1">
             <div className="text-rose-800 font-bold text-sm">Waktu Pembayaran Habis</div>
             <p className="text-xs text-rose-600">
               Sesi pembayaran Anda telah kedaluwarsa. Slot waktu ini telah dilepas otomatis. Silakan lakukan pemesanan ulang.
@@ -259,11 +259,11 @@ export default function BookingCheckout() {
         )}
 
         {/* Booking Details Card */}
-        <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
-          <div className="px-5 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+        <div className="bg-[#FDFBF7] border border-[#064E3B] rounded-none shadow-[4px_4px_0_#064E3B] overflow-hidden">
+          <div className="px-5 py-4 border-b border-[#064E3B] flex justify-between items-center bg-[#FDFBF7]/50">
             <div>
-              <span className="text-xxs uppercase tracking-wider font-semibold text-slate-400">Kode Booking</span>
-              <h2 className="text-base font-extrabold text-slate-800 mt-0.5">{booking.booking_code}</h2>
+              <span className="text-xxs uppercase tracking-wider font-semibold text-[#064E3B]/45">Kode Booking</span>
+              <h2 className="text-base font-extrabold text-[#064E3B] mt-0.5">{booking.booking_code}</h2>
             </div>
             <Badge variant={isExpired ? 'error' : 'warning'}>
               {isExpired ? 'Kedaluwarsa' : 'Menunggu Bayar'}
@@ -271,32 +271,32 @@ export default function BookingCheckout() {
           </div>
 
           <div className="p-5 flex flex-col gap-4 text-sm">
-            <div className="flex justify-between items-center pb-3 border-b border-slate-100">
-              <span className="text-slate-500">Pemain / Pemesan</span>
-              <span className="font-semibold text-slate-800">{booking.customer_name}</span>
+            <div className="flex justify-between items-center pb-3 border-b border-[#064E3B]">
+              <span className="text-[#064E3B]/65">Pemain / Pemesan</span>
+              <span className="font-semibold text-[#064E3B]">{booking.customer_name}</span>
             </div>
 
-            <div className="flex justify-between items-center pb-3 border-b border-slate-100">
-              <span className="text-slate-500">Lapangan</span>
-              <span className="font-semibold text-slate-800">
+            <div className="flex justify-between items-center pb-3 border-b border-[#064E3B]">
+              <span className="text-[#064E3B]/65">Lapangan</span>
+              <span className="font-semibold text-[#064E3B]">
                 {booking.court?.name ?? 'Lapangan'} ({booking.court?.sport_type ?? 'Umum'})
               </span>
             </div>
 
-            <div className="flex justify-between items-center pb-3 border-b border-slate-100">
-              <span className="text-slate-500">Jadwal Main</span>
-              <span className="font-semibold text-slate-800 text-right">
+            <div className="flex justify-between items-center pb-3 border-b border-[#064E3B]">
+              <span className="text-[#064E3B]/65">Jadwal Main</span>
+              <span className="font-semibold text-[#064E3B] text-right">
                 {formatDateIndo(booking.start_time)}
                 <br />
-                <span className="text-xs text-slate-400 font-normal">
+                <span className="text-xs text-[#064E3B]/45 font-normal">
                   {booking.start_time.split(' ')[1]?.substring(0, 5)} - {booking.end_time.split(' ')[1]?.substring(0, 5)}
                 </span>
               </span>
             </div>
 
             <div className="flex justify-between items-center pt-2">
-              <span className="text-base font-bold text-slate-800">Total Pembayaran</span>
-              <span className="text-xl font-black text-emerald-600">
+              <span className="text-base font-bold text-[#064E3B]">Total Pembayaran</span>
+              <span className="text-xl font-black text-[#10B981]">
                 {formatRupiah(booking.price)}
               </span>
             </div>

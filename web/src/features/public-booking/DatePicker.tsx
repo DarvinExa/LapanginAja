@@ -69,7 +69,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-sm font-semibold text-slate-800">Pilih Tanggal</span>
+      <span className="text-sm font-semibold text-[#064E3B]">Pilih Tanggal</span>
       <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-200">
         {days.map((date, index) => {
           const val = formatDateValue(date);
@@ -80,15 +80,15 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               key={index}
               type="button"
               onClick={() => onChange(val)}
-              className={`flex flex-col items-center justify-center p-3 rounded-lg border min-w-[70px] transition-all duration-200 cursor-pointer ${
+              className={`flex flex-col items-center justify-center p-3 rounded-none border min-w-[70px] transition-all duration-200 cursor-pointer ${
                 isSelected
-                  ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm'
-                  : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+                  ? 'bg-[#10B981] border-[#064E3B] text-white shadow-[4px_4px_0_#064E3B]'
+                  : 'bg-[#FDFBF7] border-[#064E3B] text-[#064E3B] hover:bg-[#FDFBF7]'
               }`}
             >
               <span
                 className={`text-xxs uppercase tracking-wider font-semibold ${
-                  isSelected ? 'text-emerald-100' : 'text-slate-400'
+                  isSelected ? 'text-[#FDFBF7]' : 'text-[#064E3B]/45'
                 }`}
               >
                 {getDayName(date)}
@@ -96,7 +96,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
               <span className="text-lg font-bold mt-0.5">{date.getDate()}</span>
               <span
                 className={`text-xxs font-medium mt-0.5 ${
-                  isSelected ? 'text-emerald-100' : 'text-slate-400'
+                  isSelected ? 'text-[#FDFBF7]' : 'text-[#064E3B]/45'
                 }`}
               >
                 {getMonthName(date)}

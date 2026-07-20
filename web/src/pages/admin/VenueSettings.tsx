@@ -100,7 +100,7 @@ export default function VenueSettings() {
     return (
       <div className="flex flex-col gap-6">
         <Skeleton className="h-10 w-48" />
-        <Skeleton className="h-60 w-full rounded-xl" />
+        <Skeleton className="h-60 w-full rounded-none" />
       </div>
     );
   }
@@ -110,18 +110,18 @@ export default function VenueSettings() {
       
       {/* Title Header */}
       <div className="flex items-center gap-2">
-        <Gear size={24} className="text-emerald-600" />
+        <Gear size={24} className="text-[#10B981]" />
         <div>
-          <h2 className="text-base font-bold text-slate-800">Pengaturan Venue</h2>
-          <p className="text-xxs text-slate-400 font-medium">Ubah detail profil venue, batas booking, dan durasi hold pembayaran</p>
+          <h2 className="text-base font-bold text-[#064E3B]">Pengaturan Venue</h2>
+          <p className="text-xxs text-[#064E3B]/45 font-medium">Ubah detail profil venue, batas booking, dan durasi hold pembayaran</p>
         </div>
       </div>
 
       {/* Form Settings Card */}
-      <div className="bg-white border border-slate-200 rounded-xl shadow-sm max-w-2xl w-full">
+      <div className="bg-[#FDFBF7] border border-[#064E3B] rounded-none shadow-[4px_4px_0_#064E3B] max-w-2xl w-full">
         <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-5">
           
-          <h3 className="text-sm font-bold text-slate-800 border-b border-slate-50 pb-2.5">
+          <h3 className="text-sm font-bold text-[#064E3B] border-b border-slate-50 pb-2.5">
             Profil Venue
           </h3>
 
@@ -171,22 +171,22 @@ export default function VenueSettings() {
           />
 
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-semibold text-slate-500">Deskripsi / Tentang Bisnis (Opsional)</label>
+            <label className="text-xs font-semibold text-[#064E3B]/65">Deskripsi / Tentang Bisnis (Opsional)</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Ceritakan tentang bisnis lapangan olahraga Anda..."
               rows={3}
-              className="w-full px-3 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500"
+              className="w-full px-3 py-2 text-sm bg-[#FDFBF7] border border-[#064E3B] rounded-none focus:outline-none focus:ring-1 focus:ring-emerald-500"
             />
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-semibold text-slate-500">Zona Waktu Venue</label>
+            <label className="text-xs font-semibold text-[#064E3B]/65">Zona Waktu Venue</label>
             <select
               value={timezone}
               onChange={(e) => setTimezone(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500"
+              className="w-full px-3 py-2 text-sm bg-[#FDFBF7] border border-[#064E3B] rounded-none focus:outline-none focus:ring-1 focus:ring-emerald-500"
             >
               <option value="Asia/Jakarta">WIB (Asia/Jakarta)</option>
               <option value="Asia/Makassar">WITA (Asia/Makassar)</option>
@@ -194,7 +194,7 @@ export default function VenueSettings() {
             </select>
           </div>
 
-          <h3 className="text-sm font-bold text-slate-800 border-b border-slate-50 pb-2.5 mt-2">
+          <h3 className="text-sm font-bold text-[#064E3B] border-b border-slate-50 pb-2.5 mt-2">
             Kebijakan & Batasan Pemesanan
           </h3>
 
@@ -230,7 +230,7 @@ export default function VenueSettings() {
             helperText="Jumlah hari ke depan maksimal yang bisa dipesan oleh pemain."
           />
 
-          <div className="pt-3 border-t border-slate-100 flex justify-end gap-2.5">
+          <div className="pt-3 border-t border-[#064E3B] flex justify-end gap-2.5">
             <Button type="submit" isLoading={isSaving} className="px-6 py-2.5">
               Simpan Perubahan
             </Button>

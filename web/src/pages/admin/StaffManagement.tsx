@@ -128,15 +128,15 @@ export default function StaffManagement() {
       {/* Title Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Users size={24} className="text-emerald-600" />
+          <Users size={24} className="text-[#10B981]" />
           <div>
-            <h2 className="text-base font-bold text-slate-800">Kelola Akun Staff (CS)</h2>
-            <p className="text-xxs text-slate-400 font-medium">Buat akun untuk komputer/gadget customer service karyawan kasir walk-in</p>
+            <h2 className="text-base font-bold text-[#064E3B]">Kelola Akun Staff (CS)</h2>
+            <p className="text-xxs text-[#064E3B]/45 font-medium">Buat akun untuk komputer/gadget customer service karyawan kasir walk-in</p>
           </div>
         </div>
         <Button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-1.5 text-xs py-2 px-3 shadow-sm font-bold"
+          className="flex items-center gap-1.5 text-xs py-2 px-3 shadow-[4px_4px_0_#064E3B] font-bold"
           icon={<Plus size={16} />}
         >
           Tambah Staff CS
@@ -144,17 +144,17 @@ export default function StaffManagement() {
       </div>
 
       {/* Staff List Card */}
-      <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden max-w-4xl w-full">
+      <div className="bg-[#FDFBF7] border border-[#064E3B] rounded-none shadow-[4px_4px_0_#064E3B] overflow-hidden max-w-4xl w-full">
         {isLoading ? (
           <div className="p-6 flex flex-col gap-4">
             <Skeleton className="h-10 w-full" />
-            <Skeleton className="h-20 w-full rounded-lg" />
+            <Skeleton className="h-20 w-full rounded-none" />
           </div>
         ) : staffList.length === 0 ? (
           <div className="p-12 text-center flex flex-col items-center justify-center gap-2">
-            <UserCheck size={40} className="text-slate-300" />
-            <span className="text-sm font-bold text-slate-500">Belum Ada Akun Staff</span>
-            <span className="text-xs text-slate-400 max-w-xs">
+            <UserCheck size={40} className="text-[#064E3B]/30" />
+            <span className="text-sm font-bold text-[#064E3B]/65">Belum Ada Akun Staff</span>
+            <span className="text-xs text-[#064E3B]/45 max-w-xs">
               Tambahkan akun staff untuk ditaruh di meja kasir/karyawan Anda agar mereka dapat membantu memproses walk-in sewa langsung.
             </span>
           </div>
@@ -162,7 +162,7 @@ export default function StaffManagement() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider">
+                <tr className="bg-[#FDFBF7] border-b border-[#064E3B] text-[#064E3B]/65 font-bold uppercase tracking-wider">
                   <th className="p-4">Nama</th>
                   <th className="p-4">Email</th>
                   <th className="p-4">No. Telepon</th>
@@ -170,14 +170,14 @@ export default function StaffManagement() {
                   <th className="p-4 text-center">Aksi</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+              <tbody className="divide-y divide-slate-100 font-medium text-[#064E3B]">
                 {staffList.map((staff) => (
-                  <tr key={staff.id} className="hover:bg-slate-50/50 transition-colors">
-                    <td className="p-4 font-bold text-slate-800">{staff.name}</td>
+                  <tr key={staff.id} className="hover:bg-[#FDFBF7]/50 transition-colors">
+                    <td className="p-4 font-bold text-[#064E3B]">{staff.name}</td>
                     <td className="p-4">{staff.email}</td>
                     <td className="p-4">{staff.phone}</td>
                     <td className="p-4">
-                      <span className="px-2 py-1 text-xxs font-bold text-emerald-800 bg-emerald-100/60 rounded-md capitalize">
+                      <span className="px-2 py-1 text-xxs font-bold text-[#064E3B] bg-[#10B981]/25 rounded-none capitalize">
                         {staff.role}
                       </span>
                     </td>
@@ -185,7 +185,7 @@ export default function StaffManagement() {
                       <button
                         onClick={() => handleDeleteStaff(staff.id)}
                         disabled={isDeleting !== null}
-                        className="text-rose-600 hover:text-rose-800 disabled:text-slate-400 p-1.5 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
+                        className="text-rose-600 hover:text-rose-800 disabled:text-[#064E3B]/45 p-1.5 hover:bg-rose-50 rounded-none transition-colors cursor-pointer"
                         title="Hapus Staff"
                       >
                         <Trash size={16} />
@@ -204,20 +204,20 @@ export default function StaffManagement() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"
+            className="fixed inset-0 bg-[#064E3B]/60  transition-opacity"
             onClick={() => setIsModalOpen(false)}
           />
 
           {/* Dialog Panel */}
-          <div className="relative bg-white border border-slate-200 rounded-xl shadow-lg max-w-md w-full overflow-hidden z-10 animate-fade-in flex flex-col">
-            <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-              <span className="text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                <Users size={18} className="text-emerald-600" />
+          <div className="relative bg-[#FDFBF7] border border-[#064E3B] rounded-none shadow-[6px_6px_0_#064E3B] max-w-md w-full overflow-hidden z-10 animate-fade-in flex flex-col">
+            <div className="p-5 border-b border-[#064E3B] flex items-center justify-between bg-[#FDFBF7]/50">
+              <span className="text-sm font-bold text-[#064E3B] flex items-center gap-1.5">
+                <Users size={18} className="text-[#10B981]" />
                 Tambah Akun Staff Baru
               </span>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 transition-colors focus:outline-none"
+                className="text-[#064E3B]/45 hover:text-[#064E3B]/80 transition-colors focus:outline-none"
               >
                 <X size={18} />
               </button>

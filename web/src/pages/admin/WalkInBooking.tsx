@@ -155,10 +155,10 @@ export default function WalkInBooking() {
       
       {/* Title Header */}
       <div className="flex items-center gap-2">
-        <UserCheck size={24} className="text-emerald-600" />
+        <UserCheck size={24} className="text-[#10B981]" />
         <div>
-          <h2 className="text-base font-bold text-slate-800">Booking Walk-In / Manual</h2>
-          <p className="text-xxs text-slate-400 font-medium">Buat pemesanan langsung di tempat untuk tamu offline</p>
+          <h2 className="text-base font-bold text-[#064E3B]">Booking Walk-In / Manual</h2>
+          <p className="text-xxs text-[#064E3B]/45 font-medium">Buat pemesanan langsung di tempat untuk tamu offline</p>
         </div>
       </div>
 
@@ -169,7 +169,7 @@ export default function WalkInBooking() {
         <div className="lg:col-span-2 flex flex-col gap-5">
           {/* Court Tabs */}
           <div className="flex flex-col gap-2">
-            <span className="text-sm font-semibold text-slate-800">Pilih Lapangan</span>
+            <span className="text-sm font-semibold text-[#064E3B]">Pilih Lapangan</span>
             <div className="flex gap-2 overflow-x-auto pb-1">
               {courts.map((court) => {
                 const isSelected = selectedCourt?.id === court.id;
@@ -177,10 +177,10 @@ export default function WalkInBooking() {
                   <button
                     key={court.id}
                     onClick={() => setSelectedCourt(court)}
-                    className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-all duration-200 cursor-pointer ${
+                    className={`px-4 py-2 rounded-none text-sm font-semibold border transition-all duration-200 cursor-pointer ${
                       isSelected
-                        ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm'
-                        : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                        ? 'bg-[#10B981] border-[#064E3B] text-white shadow-[4px_4px_0_#064E3B]'
+                        : 'bg-[#FDFBF7] border-[#064E3B] text-[#064E3B]/80 hover:bg-[#FDFBF7]'
                     }`}
                   >
                     {court.name}
@@ -207,19 +207,19 @@ export default function WalkInBooking() {
         </div>
 
         {/* Walk-in Form (right) */}
-        <div className="lg:col-span-1 bg-white border border-slate-200 p-5 rounded-xl shadow-sm">
-          <h3 className="text-sm font-bold text-slate-800 border-b border-slate-100 pb-3 mb-4">
+        <div className="lg:col-span-1 bg-[#FDFBF7] border border-[#064E3B] p-5 rounded-none shadow-[4px_4px_0_#064E3B]">
+          <h3 className="text-sm font-bold text-[#064E3B] border-b border-[#064E3B] pb-3 mb-4">
             Form Pemesanan Walk-In
           </h3>
 
           {selectedSlot ? (
             <form onSubmit={handleWalkInSubmit} className="flex flex-col gap-4">
-              <div className="bg-slate-50 rounded-lg p-3 text-xs border border-slate-100 flex flex-col gap-1 text-slate-600">
+              <div className="bg-[#FDFBF7] rounded-none p-3 text-xs border border-[#064E3B] flex flex-col gap-1 text-[#064E3B]/80">
                 <div>
-                  <span className="font-semibold text-slate-700 font-sans">Lapangan:</span> {selectedCourt?.name}
+                  <span className="font-semibold text-[#064E3B] font-sans">Lapangan:</span> {selectedCourt?.name}
                 </div>
                 <div>
-                  <span className="font-semibold text-slate-700 font-sans">Waktu:</span> {selectedDate} ({selectedSlot.start_time} - {selectedSlot.end_time})
+                  <span className="font-semibold text-[#064E3B] font-sans">Waktu:</span> {selectedDate} ({selectedSlot.start_time} - {selectedSlot.end_time})
                 </div>
               </div>
 
@@ -252,12 +252,12 @@ export default function WalkInBooking() {
               />
 
               <div className="flex flex-col gap-1.5 w-full">
-                <label className="text-sm font-semibold text-slate-800">Catatan</label>
+                <label className="text-sm font-semibold text-[#064E3B]">Catatan</label>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   rows={2}
-                  className="w-full px-3 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-600"
+                  className="w-full px-3 py-2 text-sm bg-[#FDFBF7] border border-[#064E3B] rounded-none focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-[#064E3B]"
                   placeholder="Catatan tambahan (pembayaran tunai dll)"
                 />
               </div>
@@ -267,7 +267,7 @@ export default function WalkInBooking() {
               </Button>
             </form>
           ) : (
-            <div className="text-center text-slate-500 text-xs py-8">
+            <div className="text-center text-[#064E3B]/65 text-xs py-8">
               Pilih slot waktu terlebih dahulu untuk menampilkan formulir pemesanan.
             </div>
           )}

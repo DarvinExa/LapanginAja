@@ -25,7 +25,7 @@ export const SlotGrid: React.FC<SlotGridProps> = ({
   if (isLoading) {
     return (
       <div className="flex flex-col gap-2">
-        <span className="text-sm font-semibold text-slate-800">
+        <span className="text-sm font-semibold text-[#064E3B]">
           Pilih Jam Main
         </span>
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
@@ -40,14 +40,14 @@ export const SlotGrid: React.FC<SlotGridProps> = ({
   if (slots.length === 0) {
     return (
       <div className="flex flex-col gap-2">
-        <span className="text-sm font-semibold text-slate-800">
+        <span className="text-sm font-semibold text-[#064E3B]">
           Pilih Jam Main
         </span>
-        <div className="flex flex-col items-center justify-center p-8 bg-slate-50 border border-dashed border-slate-200 rounded-xl text-center">
-          <span className="text-sm font-semibold text-slate-500">
+        <div className="flex flex-col items-center justify-center p-8 bg-[#FDFBF7] border border-dashed border-[#064E3B] rounded-none text-center">
+          <span className="text-sm font-semibold text-[#064E3B]/65">
             Tidak ada slot waktu operasional yang tersedia pada tanggal ini.
           </span>
-          <span className="text-xs text-slate-400 mt-1">
+          <span className="text-xs text-[#064E3B]/45 mt-1">
             Silakan pilih tanggal lain atau hubungi pengelola.
           </span>
         </div>
@@ -63,7 +63,7 @@ export const SlotGrid: React.FC<SlotGridProps> = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-sm font-semibold text-slate-800">
+      <span className="text-sm font-semibold text-[#064E3B]">
         Pilih Jam Main
       </span>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
@@ -77,12 +77,12 @@ export const SlotGrid: React.FC<SlotGridProps> = ({
               type="button"
               disabled={booked}
               onClick={() => onSelectSlot(slot)}
-              className={`flex flex-col items-center justify-center p-3 rounded-lg border text-center transition-all duration-150 focus:outline-none cursor-pointer ${
+              className={`flex flex-col items-center justify-center p-3 rounded-none border text-center transition-all duration-150 focus:outline-none cursor-pointer ${
                 selected
-                  ? 'bg-orange-500 border-orange-500 text-white shadow-sm ring-2 ring-orange-500/20'
+                  ? 'bg-[#10B981] border-[#064E3B] text-white shadow-[4px_4px_0_#064E3B] ring-2 ring-[#064E3B]/20'
                   : booked
-                  ? 'bg-slate-100 border-slate-100 text-slate-400 cursor-not-allowed opacity-60'
-                  : 'bg-emerald-50/20 border-emerald-200 text-emerald-900 hover:bg-emerald-50/50 hover:border-emerald-300'
+                  ? 'bg-slate-100 border-[#064E3B] text-[#064E3B]/45 cursor-not-allowed opacity-60'
+                  : 'bg-[#FDFBF7] border-[#064E3B] text-[#064E3B] hover:bg-[#10B981]/15 hover:border-[#064E3B]'
               }`}
             >
               <span className="text-sm font-bold">
@@ -90,7 +90,7 @@ export const SlotGrid: React.FC<SlotGridProps> = ({
               </span>
               <span
                 className={`text-xxs font-medium mt-1 ${
-                  selected ? 'text-orange-100' : booked ? 'text-slate-400' : 'text-emerald-700'
+                  selected ? 'text-[#064E3B]' : booked ? 'text-[#064E3B]/45' : 'text-[#064E3B]'
                 }`}
               >
                 {booked ? 'Terisi' : formatRupiah(slot.price)}

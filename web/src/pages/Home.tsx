@@ -2,87 +2,51 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { useAuth } from '../context/AuthContext';
 import {
-  SoccerBall,
-  CalendarCheck,
+  ArrowRight,
+  Clock,
   CreditCard,
-  ShieldCheck,
-  House,
   DeviceMobile,
-  Lightning,
-  CheckCircle,
-  Storefront,
+  MapPin,
   QrCode,
   Receipt,
-  MapPin,
-  ChartLineUp,
-  Clock,
 } from '@phosphor-icons/react';
+import logoMark from '../assets/lapanginaja-mark.png';
 
 const previewSlots = [
-  { time: '08:00', state: 'available' as const },
-  { time: '09:00', state: 'booked' as const },
-  { time: '10:00', state: 'selected' as const },
-  { time: '11:00', state: 'available' as const },
-  { time: '13:00', state: 'available' as const },
-  { time: '14:00', state: 'booked' as const },
-  { time: '15:00', state: 'available' as const },
-  { time: '16:00', state: 'available' as const },
-  { time: '17:00', state: 'booked' as const },
+  { time: '08:00', state: 'available' },
+  { time: '09:00', state: 'selected' },
+  { time: '10:00', state: 'booked' },
+  { time: '11:00', state: 'available' },
+  { time: '12:00', state: 'booked' },
+  { time: '13:00', state: 'available' },
 ];
 
-const slotStyles: Record<string, string> = {
-  available: 'border-emerald-200 bg-emerald-50 text-emerald-700',
-  booked: 'border-slate-200 bg-slate-100 text-slate-400',
-  selected: 'border-orange-400 bg-orange-500 text-white shadow-sm',
-};
-
-const paymentMethods = ['QRIS', 'GoPay', 'ShopeePay', 'Transfer Bank', 'Virtual Account'];
-
 const features = [
-  {
-    icon: CalendarCheck,
-    accent: 'bg-emerald-50 text-emerald-600',
-    title: 'Pemesanan Real Time',
-    body: 'Pilih slot waktu lapangan yang tersedia dan kunci seketika. Sistem mencegah bentrok jadwal secara otomatis, tanpa perlu chat admin manual.',
-  },
-  {
-    icon: CreditCard,
-    accent: 'bg-orange-50 text-orange-500',
-    title: 'Pembayaran Otomatis',
-    body: 'Terhubung dengan Midtrans untuk pembayaran instan. Pelanggan bisa membayar lunas lewat QRIS, GoPay, ShopeePay, atau transfer bank.',
-  },
-  {
-    icon: ShieldCheck,
-    accent: 'bg-sky-50 text-sky-500',
-    title: 'E-Ticket dan Invoice',
-    body: 'Setelah pembayaran terkonfirmasi, e-ticket QR Code dan invoice PDF resmi langsung dikirim ke email pelanggan.',
-  },
+  { no: '01', icon: DeviceMobile, title: 'Link Bio Mulus', body: 'Pelanggan buka link, cek jadwal, lalu pilih jam sendiri. Nggak perlu chat admin dulu.' },
+  { no: '02', icon: CreditCard, title: 'Duit Masuk Otomatis', body: 'QRIS dan pembayaran digital langsung diverifikasi. Slot baru terkunci kalau bayarannya beres.' },
+  { no: '03', icon: Clock, title: 'Standby 24 Jam', body: 'Booking tetap jalan waktu lu tidur. Sistem kerja terus tanpa minta lembur atau kopi.' },
 ];
 
 const steps = [
-  {
-    icon: MapPin,
-    title: 'Pilih lapangan dan jadwal',
-    body: 'Buka halaman venue, lihat ketersediaan slot secara langsung, lalu pilih jam yang kamu mau.',
-  },
-  {
-    icon: QrCode,
-    title: 'Bayar dengan aman',
-    body: 'Selesaikan pembayaran lewat QRIS atau e-wallet. Slot otomatis terkunci selama proses berlangsung.',
-  },
-  {
-    icon: Receipt,
-    title: 'Main dan tunjukkan tiket',
-    body: 'Terima e-ticket beserta QR Code. Tunjukkan saat tiba di lokasi, tanpa antre di kasir.',
-  },
+  { icon: MapPin, title: 'Pilih venue', body: 'Cek lapangan dan jam kosong langsung dari satu halaman.' },
+  { icon: QrCode, title: 'Bayar sendiri', body: 'Pilih QRIS atau metode digital lain. Nggak pake kirim bukti transfer.' },
+  { icon: Receipt, title: 'Datang dan main', body: 'E-ticket langsung masuk. Tinggal datang, tunjukkan tiket, lalu gas main.' },
 ];
 
-const ownerPoints = [
-  'Dukungan multi court untuk banyak lapangan sekaligus',
-  'Pemesanan walk-in di tempat dengan kunci slot manual',
-  'Kalender jadwal interaktif untuk setiap lapangan',
-  'Rekap okupansi harian dan grafik pendapatan bersih',
+const testimonials = [
+  { quote: 'Dulu satu admin bisa habis setengah hari cuma buat bales chat. Sekarang pelanggan beresin booking sendiri.', name: 'Raka Pratama', role: 'Owner Arena 78, Bandung' },
+  { quote: 'Jadwal bentrok turun drastis. Yang paling enak, laporan harian nggak perlu dirakit manual lagi.', name: 'Nadia Putri', role: 'Manager Smash Hall, Surabaya' },
+  { quote: 'Booking jam malam tetap masuk waktu tim udah pulang. Link venue ini beneran jadi kasir kedua.', name: 'Fajar Aditya', role: 'Owner Kickspace, Makassar' },
 ];
+
+function Brand() {
+  return (
+    <span className="flex items-center gap-3">
+      <img src={logoMark} alt="" className="h-9 w-9 object-contain" />
+      <span className="font-display text-xl font-bold tracking-[-0.06em]">LapanginAja</span>
+    </span>
+  );
+}
 
 export default function Home() {
   const { isAuthenticated, user, logout } = useAuth();
@@ -93,358 +57,128 @@ export default function Home() {
       const tenant = user.tenants && user.tenants.length > 0 ? user.tenants[0] : null;
       return tenant ? `/admin/${tenant.slug}` : '/onboard';
     }
-    return '/senayan-sport'; // Fallback for players to book
+    return '/senayan-sport';
   };
 
   const handleLogout = async () => {
-    try {
-      await logout();
-    } catch {
-      // Ignored
-    }
+    try { await logout(); } catch { /* Ignored */ }
   };
 
   const isStaffOrOwner = user?.role === 'owner' || user?.role === 'staff';
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900">
-
-      {/* Navbar */}
-      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2.5">
-            <span className="grid place-items-center h-9 w-9 rounded-lg bg-emerald-600 text-white">
-              <SoccerBall size={22} weight="fill" />
-            </span>
-            <span className="text-lg font-extrabold tracking-tight text-slate-900">
-              LapanginAja
-            </span>
-          </Link>
-          <div className="flex items-center gap-2 sm:gap-3">
+    <div className="min-h-screen bg-[#FDFBF7] text-[#064E3B]">
+      <div className="editorial-shell">
+        <header className="sticky top-0 z-40 grid grid-cols-[1fr_auto] border-b border-[#064E3B] bg-[#FDFBF7] lg:grid-cols-[310px_1fr_auto]">
+          <Link to="/" className="flex min-h-18 items-center px-5 lg:border-r lg:border-[#064E3B] lg:px-8"><Brand /></Link>
+          <nav className="hidden items-stretch lg:flex">
+            <a href="#fitur" className="flex items-center border-r border-[#064E3B] px-8 font-semibold uppercase tracking-[0.08em] hover:bg-[#10B981]">Fitur</a>
+            <a href="#cara-kerja" className="flex items-center border-r border-[#064E3B] px-8 font-semibold uppercase tracking-[0.08em] hover:bg-[#10B981]">Cara Kerja</a>
+            <a href="#cerita-owner" className="flex items-center border-r border-[#064E3B] px-8 font-semibold uppercase tracking-[0.08em] hover:bg-[#10B981]">Cerita Owner</a>
+          </nav>
+          <div className="flex items-stretch">
             {isAuthenticated && user ? (
               <>
-                <span className="hidden sm:inline text-sm text-slate-500">
-                  Halo, <span className="font-semibold text-slate-800">{user.name}</span>
-                </span>
-                <Link to={getDashboardLink()}>
-                  <Button className="px-4 py-2 text-sm">
-                    {isStaffOrOwner ? 'Dashboard Admin' : 'Pesan Lapangan'}
-                  </Button>
-                </Link>
-                <Button variant="secondary" className="px-4 py-2 text-sm" onClick={handleLogout}>
-                  Keluar
-                </Button>
+                <Link to={getDashboardLink()} className="flex items-center border-l border-[#064E3B] px-4 text-sm font-bold uppercase hover:bg-[#10B981] sm:px-6">{isStaffOrOwner ? 'Dashboard' : 'Cari Lapangan'}</Link>
+                <button onClick={handleLogout} className="border-l border-[#064E3B] bg-[#064E3B] px-4 text-sm font-bold uppercase text-[#FDFBF7] hover:bg-[#10B981] hover:text-[#064E3B] sm:px-6">Keluar</button>
               </>
             ) : (
               <>
-                <Link to="/login">
-                  <Button variant="secondary" className="px-4 py-2">
-                    Masuk
-                  </Button>
-                </Link>
-                <Link to="/register">
-                  <Button className="px-4 py-2">
-                    Daftar
-                  </Button>
-                </Link>
+                <Link to="/login" className="hidden items-center border-l border-[#064E3B] px-6 text-sm font-bold uppercase hover:bg-[#10B981] sm:flex">Masuk</Link>
+                <Link to="/register" className="flex items-center border-l border-[#064E3B] bg-[#064E3B] px-5 text-sm font-bold uppercase text-[#FDFBF7] hover:bg-[#10B981] hover:text-[#064E3B] sm:px-7">Daftar Gratis</Link>
               </>
             )}
           </div>
-        </div>
-      </header>
+        </header>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-slate-200 bg-white">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full bg-emerald-100/60 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-orange-100/40 blur-3xl"
-        />
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left column */}
-          <div className="flex flex-col gap-6">
-            <span className="inline-flex items-center gap-2 self-start rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-              <Lightning size={14} weight="fill" />
-              Booking lapangan tanpa ribet
-            </span>
-            <h1 className="text-4xl sm:text-5xl font-extrabold leading-[1.1] tracking-tight text-slate-900">
-              Pesan lapangan olahraga online, cepat dan pasti dapat
-            </h1>
-            <p className="text-lg text-slate-600 leading-relaxed max-w-xl">
-              Lihat jadwal secara langsung, kunci slot favoritmu, lalu bayar lewat QRIS atau e-wallet.
-              Semua beres dari satu halaman, tanpa perlu menunggu balasan admin.
-            </p>
-            <div className="flex flex-wrap items-center gap-3 mt-1">
-              {isAuthenticated && user ? (
-                <Link to={getDashboardLink()}>
-                  <Button className="px-6 py-3 text-base">
-                    {isStaffOrOwner ? 'Masuk ke Dashboard Anda' : 'Mulai Pesan Lapangan'}
-                  </Button>
+        <main>
+          <section className="grid border-b border-[#064E3B] lg:grid-cols-[1.15fr_.85fr]">
+            <div className="flex flex-col justify-center border-b border-[#064E3B] p-7 sm:p-12 lg:min-h-[720px] lg:border-b-0 lg:border-r lg:p-16 xl:p-20">
+              <span className="mb-8 w-max border border-[#064E3B] bg-[#10B981] px-4 py-2 text-xs font-bold uppercase tracking-[0.16em]">#LapanginAjaDulu</span>
+              <h1 className="font-display max-w-4xl text-[clamp(3rem,6vw,6.7rem)] font-bold uppercase leading-[0.84] tracking-[-0.075em]">
+                Lapangin Aja<br /><span className="text-[#10B981]">Kapan Aja</span><br />Di Mana Aja
+              </h1>
+              <p className="mt-9 max-w-2xl text-lg leading-relaxed sm:text-2xl">
+                Mau main tinggal pilih jam. Mau jual slot tinggal bagiin link. <strong>Jadwal, bayar, dan tiket beres tanpa chat “min, kosong?”</strong>
+              </p>
+              <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                <Link to={isAuthenticated ? getDashboardLink() : '/register?role=owner'}>
+                  <Button className="px-7 py-4 text-base" icon={<ArrowRight size={20} weight="bold" />}>{isAuthenticated ? 'BUKA DASHBOARD' : 'BUAT LINK SEKARANG'}</Button>
                 </Link>
-              ) : (
-                <Link to="/register?role=owner">
-                  <Button className="px-6 py-3 text-base" icon={<Storefront size={20} weight="fill" />}>
-                    Daftarkan Lapanganmu
-                  </Button>
+                <Link to="/senayan-sport">
+                  <Button variant="secondary" className="px-7 py-4 text-base" icon={<DeviceMobile size={20} weight="bold" />}>DEMO VENUE</Button>
                 </Link>
-              )}
-              <Link to="/senayan-sport">
-                <Button variant="secondary" className="px-6 py-3 text-base" icon={<DeviceMobile size={20} />}>
-                  Lihat Demo Venue
-                </Button>
-              </Link>
-            </div>
-            <ul className="flex flex-wrap gap-x-6 gap-y-2 mt-2 text-sm text-slate-600">
-              <li className="flex items-center gap-2">
-                <CheckCircle size={18} weight="fill" className="text-emerald-500" />
-                Tanpa biaya pendaftaran
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle size={18} weight="fill" className="text-emerald-500" />
-                Konfirmasi instan
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle size={18} weight="fill" className="text-emerald-500" />
-                E-ticket via email
-              </li>
-            </ul>
-          </div>
-
-          {/* Right column: schedule preview */}
-          <div className="relative lg:pl-6">
-            <div className="w-full max-w-md mx-auto lg:ml-auto rounded-2xl border border-slate-200 bg-white shadow-[0_1px_2px_rgba(0,0,0,0.05),0_12px_32px_rgba(15,23,42,0.08)] p-5 sm:p-6">
-              <div className="flex items-start justify-between gap-3 border-b border-slate-100 pb-4">
-                <div className="flex flex-col gap-1">
-                  <span className="font-bold text-slate-900">Lapangan Futsal A</span>
-                  <span className="flex items-center gap-1.5 text-xs text-slate-500">
-                    <MapPin size={14} weight="fill" className="text-slate-400" />
-                    Senayan Sport Center
-                  </span>
-                </div>
-                <span className="flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700">
-                  <Clock size={13} weight="fill" />
-                  Hari ini
-                </span>
               </div>
-              <div className="grid grid-cols-3 gap-2 py-4">
-                {previewSlots.map((slot) => (
-                  <div
-                    key={slot.time}
-                    className={`flex items-center justify-center rounded-lg border py-2.5 text-sm font-semibold ${slotStyles[slot.state]}`}
-                  >
-                    {slot.time}
+            </div>
+
+            <div className="relative flex min-h-[620px] items-center justify-center overflow-hidden bg-[#064E3B] p-7 sm:p-14">
+              <div aria-hidden="true" className="absolute inset-x-0 top-[18%] h-px bg-[#10B981]/40" />
+              <div aria-hidden="true" className="absolute bottom-[18%] inset-x-0 h-px bg-[#10B981]/40" />
+              <div aria-hidden="true" className="absolute inset-y-0 left-[22%] w-px bg-[#10B981]/40" />
+              <div className="relative w-full max-w-md border-2 border-[#FDFBF7] bg-[#FDFBF7] hard-shadow">
+                <div className="flex items-center justify-between border-b-2 border-[#064E3B] p-5">
+                  <div><p className="font-display text-lg font-bold uppercase">Booking Lapangan</p><p className="text-xs font-semibold uppercase tracking-[0.12em] opacity-65">Senayan Sport Center</p></div>
+                  <span className="h-4 w-4 bg-[#10B981]" />
+                </div>
+                <div className="p-5">
+                  <div className="mb-4 flex items-center justify-between text-xs font-bold uppercase tracking-[0.12em]"><span>Pilih Jam</span><span>Hari Ini</span></div>
+                  <div className="grid grid-cols-3 border-l border-t border-[#064E3B]">
+                    {previewSlots.map((slot) => <div key={slot.time} className={`border-b border-r border-[#064E3B] p-4 text-center font-bold ${slot.state === 'selected' ? 'bg-[#064E3B] text-[#FDFBF7]' : slot.state === 'booked' ? 'bg-[#064E3B]/10 opacity-40' : 'bg-[#FDFBF7]'}`}>{slot.time}</div>)}
                   </div>
-                ))}
-              </div>
-              <div className="flex items-center justify-between border-t border-slate-100 pt-4">
-                <div className="flex flex-col">
-                  <span className="text-xs text-slate-500">Slot dipilih 10:00</span>
-                  <span className="font-bold text-slate-900">Rp120.000</span>
                 </div>
-                <span className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white">
-                  Bayar sekarang
-                </span>
-              </div>
-            </div>
-            <div className="absolute -bottom-5 left-2 sm:left-6 flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-[0_8px_24px_rgba(15,23,42,0.10)]">
-              <CheckCircle size={24} weight="fill" className="text-emerald-500" />
-              <div className="flex flex-col leading-tight">
-                <span className="text-sm font-semibold text-slate-900">Pembayaran berhasil</span>
-                <span className="text-xs text-slate-500">E-ticket terkirim ke email</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Payment methods strip */}
-      <section className="border-b border-slate-200 bg-white/60">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-          <span className="text-sm font-semibold text-slate-500 whitespace-nowrap">
-            Menerima berbagai metode pembayaran
-          </span>
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            {paymentMethods.map((method) => (
-              <span
-                key={method}
-                className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600"
-              >
-                {method}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full">
-        <div className="max-w-2xl flex flex-col gap-3 mb-12">
-          <span className="text-sm font-semibold uppercase tracking-wide text-emerald-600">
-            Kenapa LapanginAja
-          </span>
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
-            Semua yang dibutuhkan untuk booking lapangan
-          </h2>
-          <p className="text-slate-600 leading-relaxed">
-            Dibuat untuk pemain yang ingin cepat dapat slot dan untuk pemilik venue yang ingin
-            kelola pemesanan dengan rapi.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {features.map((feature) => {
-            const Icon = feature.icon;
-            return (
-              <div
-                key={feature.title}
-                className="group flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-6 transition-shadow duration-200 hover:shadow-[0_1px_2px_rgba(0,0,0,0.05),0_10px_24px_rgba(15,23,42,0.06)]"
-              >
-                <div className={`grid place-items-center h-12 w-12 rounded-xl ${feature.accent}`}>
-                  <Icon size={26} weight="duotone" />
-                </div>
-                <h3 className="text-lg font-bold text-slate-900">{feature.title}</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">{feature.body}</p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="border-y border-slate-200 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="max-w-2xl flex flex-col gap-3 mb-12">
-            <span className="text-sm font-semibold uppercase tracking-wide text-emerald-600">
-              Cara kerja
-            </span>
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
-              Dari pilih slot sampai main, hanya tiga langkah
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {steps.map((step, index) => {
-              const Icon = step.icon;
-              return (
-                <div key={step.title} className="relative flex flex-col gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-6">
-                  <div className="flex items-center justify-between">
-                    <div className="grid place-items-center h-12 w-12 rounded-xl bg-white border border-slate-200 text-emerald-600">
-                      <Icon size={26} weight="duotone" />
-                    </div>
-                    <span className="text-4xl font-extrabold text-slate-200">{index + 1}</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900">{step.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">{step.body}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Owner benefits */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="flex flex-col gap-5">
-            <span className="text-sm font-semibold uppercase tracking-wide text-emerald-600">
-              Untuk pemilik venue
-            </span>
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
-              Kelola venue olahraga Anda secara profesional
-            </h2>
-            <p className="text-slate-600 leading-relaxed">
-              LapanginAja menyediakan dashboard multi-tenant lengkap dengan nama brand Anda sendiri.
-              Atur jam operasional, pantau okupansi, dan lihat performa keuangan harian dalam satu tempat.
-            </p>
-            <ul className="flex flex-col gap-3 mt-1">
-              {ownerPoints.map((point) => (
-                <li key={point} className="flex items-start gap-3 text-sm text-slate-700">
-                  <CheckCircle size={20} weight="fill" className="text-emerald-500 shrink-0 mt-0.5" />
-                  {point}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-3">
-              {isAuthenticated && user ? (
-                <Link to={getDashboardLink()}>
-                  <Button icon={<House size={18} weight="fill" />}>
-                    {isStaffOrOwner ? 'Buka Dashboard Kelola' : 'Mulai Pesan'}
-                  </Button>
-                </Link>
-              ) : (
-                <Link to="/register?role=owner">
-                  <Button icon={<House size={18} weight="fill" />}>
-                    Daftar Sebagai Owner
-                  </Button>
-                </Link>
-              )}
-            </div>
-          </div>
-
-          {/* Dashboard preview card */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.05),0_12px_32px_rgba(15,23,42,0.06)]">
-            <div className="flex items-center gap-2.5 border-b border-slate-100 pb-4">
-              <span className="grid place-items-center h-9 w-9 rounded-lg bg-emerald-600 text-white">
-                <SoccerBall size={20} weight="fill" />
-              </span>
-              <span className="font-bold text-slate-800">Dashboard Venue</span>
-            </div>
-            <div className="grid grid-cols-2 gap-3 py-4">
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <span className="text-xs text-slate-500">Okupansi hari ini</span>
-                <div className="mt-1 flex items-end gap-2">
-                  <span className="text-2xl font-extrabold text-slate-900">82%</span>
-                  <span className="flex items-center gap-1 text-xs font-semibold text-emerald-600">
-                    <ChartLineUp size={14} weight="bold" />
-                    naik
-                  </span>
-                </div>
-              </div>
-              <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <span className="text-xs text-slate-500">Pendapatan hari ini</span>
-                <div className="mt-1">
-                  <span className="text-2xl font-extrabold text-slate-900">Rp3,4jt</span>
+                <div className="border-t-2 border-[#064E3B] bg-[#10B981] p-5">
+                  <div className="mb-5 flex items-end justify-between"><div><span className="text-xs font-bold uppercase tracking-[0.12em]">Total</span><p className="font-display text-3xl font-bold">Rp150.000</p></div><span className="border-2 border-[#064E3B] bg-[#FDFBF7] px-3 py-1 text-xs font-bold">QRIS</span></div>
+                  <div className="bg-[#064E3B] p-4 text-center font-display font-bold uppercase text-[#FDFBF7]">Bayar dan kunci slot</div>
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-2.5">
-              {['Lapangan Futsal A', 'Lapangan Badminton 1', 'Lapangan Basket'].map((court, i) => (
-                <div key={court} className="flex items-center justify-between rounded-lg border border-slate-100 bg-white px-3 py-2.5">
-                  <span className="flex items-center gap-2 text-sm font-medium text-slate-700">
-                    <CalendarCheck size={16} weight="duotone" className="text-emerald-600" />
-                    {court}
-                  </span>
-                  <span className={`text-xs font-semibold ${i === 1 ? 'text-orange-500' : 'text-emerald-600'}`}>
-                    {i === 1 ? '3 slot tersisa' : 'Tersedia'}
-                  </span>
-                </div>
-              ))}
+          </section>
+
+          <div className="overflow-hidden border-b border-[#064E3B] bg-[#10B981] py-4">
+            <div className="editorial-ticker flex w-max whitespace-nowrap font-display text-lg font-bold uppercase tracking-[0.12em]">
+              {[0, 1].map((copy) => <div key={copy} className="flex"><span className="mx-8">Mesin uang otomatis</span><span className="mx-8">Bye bye jadwal bentrok</span><span className="mx-8">QRIS verifikasi instan</span><span className="mx-8">Buka 24 jam penuh</span></div>)}
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="mt-auto bg-slate-900 text-slate-400">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2.5 text-white">
-            <span className="grid place-items-center h-8 w-8 rounded-lg bg-emerald-600">
-              <SoccerBall size={18} weight="fill" />
-            </span>
-            <span className="font-bold tracking-tight">LapanginAja</span>
-          </div>
-          <nav className="flex items-center gap-6 text-sm">
-            <Link to="/senayan-sport" className="hover:text-white transition-colors">Demo Venue</Link>
-            <Link to="/login" className="hover:text-white transition-colors">Masuk</Link>
-            <Link to="/register" className="hover:text-white transition-colors">Daftar</Link>
-          </nav>
-          <div className="text-xs text-slate-500">
-            Copyright 2026 LapanginAja. Seluruh hak cipta dilindungi.
-          </div>
-        </div>
-      </footer>
+          <section id="fitur" className="border-b border-[#064E3B]">
+            <div className="grid border-b border-[#064E3B] lg:grid-cols-[.45fr_1fr]">
+              <div className="border-b border-[#064E3B] p-8 lg:border-b-0 lg:border-r lg:p-14"><span className="text-xs font-bold uppercase tracking-[0.18em]">Fitur inti / 2026</span></div>
+              <div className="p-8 sm:p-14"><h2 className="font-display text-4xl font-bold uppercase leading-[.95] tracking-[-0.055em] sm:text-6xl">Platform waras buat owner yang capek ribet.</h2></div>
+            </div>
+            <div className="grid md:grid-cols-3">
+              {features.map((feature, index) => { const Icon = feature.icon; return <article key={feature.title} className={`group min-h-[390px] p-8 sm:p-10 ${index < 2 ? 'border-b border-[#064E3B] md:border-b-0 md:border-r' : ''} hover:bg-[#10B981]`}>
+                <div className="flex items-start justify-between"><Icon size={44} weight="thin" /><span className="font-display text-5xl font-bold opacity-20">{feature.no}</span></div>
+                <h3 className="mt-20 font-display text-2xl font-bold uppercase tracking-[-0.04em]">{feature.title}</h3><p className="mt-5 text-lg leading-relaxed">{feature.body}</p>
+              </article>; })}
+            </div>
+          </section>
 
+          <section id="cara-kerja" className="grid border-b border-[#064E3B] lg:grid-cols-[.8fr_1.2fr]">
+            <div className="flex flex-col justify-between border-b border-[#064E3B] bg-[#064E3B] p-8 text-[#FDFBF7] lg:min-h-[650px] lg:border-b-0 lg:border-r lg:p-14">
+              <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#10B981]">Cara kerja</span>
+              <div><h2 className="font-display text-5xl font-bold uppercase leading-[.9] tracking-[-0.06em] sm:text-7xl">Tiga langkah. Nggak pake muter.</h2><p className="mt-8 max-w-lg text-lg leading-relaxed text-[#FDFBF7]/75">Dari pilih lapangan sampai tiket masuk email, semuanya lurus dan gampang dipahami.</p></div>
+            </div>
+            <div>
+              {steps.map((step, index) => { const Icon = step.icon; return <article key={step.title} className={`grid gap-7 p-8 sm:grid-cols-[80px_1fr] sm:p-12 ${index < steps.length - 1 ? 'border-b border-[#064E3B]' : ''}`}><div className="flex items-start justify-between sm:block"><span className="font-display text-4xl font-bold">0{index + 1}</span><Icon className="sm:mt-10" size={34} weight="thin" /></div><div><h3 className="font-display text-3xl font-bold uppercase tracking-[-0.04em]">{step.title}</h3><p className="mt-4 max-w-xl text-lg leading-relaxed">{step.body}</p></div></article>; })}
+            </div>
+          </section>
+
+          <section id="cerita-owner" className="border-b border-[#064E3B]">
+            <div className="grid border-b border-[#064E3B] p-8 sm:p-14 lg:grid-cols-[1fr_.45fr] lg:items-end"><h2 className="font-display text-5xl font-bold uppercase leading-[.9] tracking-[-0.06em] sm:text-7xl">Owner ngomong apa adanya.</h2><p className="mt-8 text-lg leading-relaxed lg:mt-0">Bukan janji manis. Ini perubahan operasional yang kerasa dari hari pertama.</p></div>
+            <div className="grid md:grid-cols-3">{testimonials.map((item, index) => <blockquote key={item.name} className={`flex min-h-[360px] flex-col justify-between p-8 sm:p-10 ${index < 2 ? 'border-b border-[#064E3B] md:border-b-0 md:border-r' : ''} ${index === 1 ? 'bg-[#10B981]' : ''}`}><p className="font-display text-2xl font-medium leading-snug">“{item.quote}”</p><footer className="mt-12 border-t border-[#064E3B] pt-5"><strong className="block uppercase">{item.name}</strong><span className="text-sm opacity-70">{item.role}</span></footer></blockquote>)}</div>
+          </section>
+
+          <section className="grid border-b border-[#064E3B] bg-[#10B981] lg:grid-cols-[1fr_auto]">
+            <div className="p-8 sm:p-14 lg:p-20"><span className="text-xs font-bold uppercase tracking-[0.18em]">Nggak pake nunggu besok</span><h2 className="mt-8 font-display text-[clamp(3.4rem,8vw,8rem)] font-bold uppercase leading-[.82] tracking-[-0.075em]">Hajar daftar sekarang.</h2><p className="mt-8 max-w-2xl text-xl font-medium leading-relaxed">Setup venue cuma butuh waktu setara seduh mie instan. Hari ini daftar, hari ini juga sistem lu mulai kerja.</p></div>
+            <div className="flex items-center border-t border-[#064E3B] p-8 lg:w-[360px] lg:border-l lg:border-t-0 lg:p-12"><Link className="w-full" to={isAuthenticated ? getDashboardLink() : '/register?role=owner'}><Button className="min-h-28 w-full px-8 text-lg" icon={<ArrowRight size={26} weight="bold" />}>HAJAR DAFTAR</Button></Link></div>
+          </section>
+        </main>
+
+        <footer className="grid bg-[#FDFBF7] lg:grid-cols-[1fr_auto]">
+          <div className="p-8 sm:p-12"><Brand /><p className="mt-7 max-w-md text-sm leading-relaxed opacity-70">Sistem booking lapangan buat owner yang mau operasional rapi dan pelanggan yang nggak suka nunggu.</p></div>
+          <div className="grid grid-cols-3 border-t border-[#064E3B] lg:border-l lg:border-t-0"><Link to="/senayan-sport" className="flex min-h-24 items-center justify-center border-r border-[#064E3B] px-5 text-sm font-bold uppercase hover:bg-[#10B981]">Demo Venue</Link><Link to="/login" className="flex min-h-24 items-center justify-center border-r border-[#064E3B] px-5 text-sm font-bold uppercase hover:bg-[#10B981]">Masuk</Link><Link to="/register" className="flex min-h-24 items-center justify-center px-5 text-sm font-bold uppercase hover:bg-[#10B981]">Daftar</Link></div>
+        </footer>
+      </div>
     </div>
   );
 }

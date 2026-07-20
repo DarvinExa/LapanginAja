@@ -75,19 +75,19 @@ export default function VerifyOtp() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-slate-50 py-12 sm:px-6 lg:px-8 px-4">
+    <div className="flex min-h-screen flex-col justify-center bg-[#FDFBF7] py-12 sm:px-6 lg:px-8 px-4">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center flex flex-col items-center gap-2">
-        <ShieldCheck size={48} className="text-emerald-600 animate-pulse" weight="fill" />
-        <h2 className="text-center text-3xl font-extrabold tracking-tight text-slate-900">
+        <ShieldCheck size={48} className="text-[#10B981] animate-pulse" weight="fill" />
+        <h2 className="text-center text-3xl font-extrabold tracking-tight text-[#064E3B]">
           Verifikasi Akun
         </h2>
-        <p className="mt-2 text-center text-sm text-slate-600">
-          Masukkan 6-digit kode OTP yang telah dikirim ke <span className="font-semibold text-slate-800">{email}</span>
+        <p className="mt-2 text-center text-sm text-[#064E3B]/80">
+          Masukkan 6-digit kode OTP yang telah dikirim ke <span className="font-semibold text-[#064E3B]">{email}</span>
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow-sm border border-slate-200 sm:rounded-xl sm:px-10">
+        <div className="bg-[#FDFBF7] py-8 px-4 shadow-[4px_4px_0_#064E3B] border border-[#064E3B] sm:rounded-none sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <Input
               label="Kode OTP"
@@ -101,7 +101,7 @@ export default function VerifyOtp() {
             />
 
             {error && (
-              <div className="rounded-lg bg-rose-50 border border-rose-100 p-3 text-xs font-semibold text-rose-700">
+              <div className="rounded-none bg-rose-50 border border-rose-100 p-3 text-xs font-semibold text-rose-700">
                 {error}
               </div>
             )}
@@ -115,12 +115,12 @@ export default function VerifyOtp() {
             </Button>
           </form>
 
-          <div className="mt-6 border-t border-slate-100 pt-6 text-center text-xs flex flex-col gap-2">
-            <span className="text-slate-500">Belum menerima kode OTP?</span>
+          <div className="mt-6 border-t border-[#064E3B] pt-6 text-center text-xs flex flex-col gap-2">
+            <span className="text-[#064E3B]/65">Belum menerima kode OTP?</span>
             <button
               onClick={handleResendOtp}
               disabled={isResending}
-              className="font-bold text-emerald-600 hover:text-emerald-700 disabled:text-slate-400 transition-colors focus:outline-none cursor-pointer"
+              className="font-bold text-[#10B981] hover:text-[#064E3B] disabled:text-[#064E3B]/45 transition-colors focus:outline-none cursor-pointer"
             >
               {isResending ? 'Mengirim ulang...' : 'Kirim Ulang Kode OTP'}
             </button>

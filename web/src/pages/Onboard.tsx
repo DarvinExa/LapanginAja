@@ -92,22 +92,22 @@ export default function Onboard() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#FDFBF7] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full mx-auto flex flex-col gap-6">
         
         {/* Logo and title */}
         <div className="text-center flex flex-col items-center gap-2">
-          <SoccerBall size={48} className="text-emerald-600" weight="fill" />
-          <h2 className="text-2xl font-black text-slate-800 tracking-tight">
+          <SoccerBall size={48} className="text-[#10B981]" weight="fill" />
+          <h2 className="text-2xl font-black text-[#064E3B] tracking-tight">
             Daftarkan Venue Olahraga Anda
           </h2>
-          <p className="text-xs text-slate-500 max-w-xs mx-auto">
+          <p className="text-xs text-[#064E3B]/65 max-w-xs mx-auto">
             Langkah terakhir untuk mengaktifkan dashboard SaaS khusus venue Anda.
           </p>
         </div>
 
         {/* Card Form */}
-        <div className="bg-white border border-slate-200 p-6 rounded-xl shadow-sm">
+        <div className="bg-[#FDFBF7] border border-[#064E3B] p-6 rounded-none shadow-[4px_4px_0_#064E3B]">
           <form onSubmit={handleOnboardSubmit} className="flex flex-col gap-4">
             
             <Input
@@ -152,11 +152,11 @@ export default function Onboard() {
             />
 
             <div className="flex flex-col gap-1">
-              <label className="text-xs font-semibold text-slate-500">Zona Waktu</label>
+              <label className="text-xs font-semibold text-[#064E3B]/65">Zona Waktu</label>
               <select
                 value={timezone}
                 onChange={(e) => setTimezone(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                className="w-full px-3 py-2 text-sm bg-[#FDFBF7] border border-[#064E3B] rounded-none focus:outline-none focus:ring-1 focus:ring-emerald-500"
               >
                 <option value="Asia/Jakarta">WIB (Asia/Jakarta)</option>
                 <option value="Asia/Makassar">WITA (Asia/Makassar)</option>

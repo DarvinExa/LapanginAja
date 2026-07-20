@@ -116,8 +116,8 @@ export default function BookingList() {
   if (isLoadingTenant) {
     return (
       <div className="flex flex-col gap-6">
-        <Skeleton className="h-12 w-full rounded-xl" />
-        <Skeleton className="h-60 w-full rounded-xl" />
+        <Skeleton className="h-12 w-full rounded-none" />
+        <Skeleton className="h-60 w-full rounded-none" />
       </div>
     );
   }
@@ -157,22 +157,22 @@ export default function BookingList() {
       
       {/* Title Header */}
       <div className="flex items-center gap-2">
-        <ClipboardText size={24} className="text-emerald-600" />
+        <ClipboardText size={24} className="text-[#10B981]" />
         <div>
-          <h2 className="text-base font-bold text-slate-800">Manajemen Pemesanan</h2>
-          <p className="text-xxs text-slate-400 font-medium">Lihat, saring, dan perbarui seluruh riwayat booking lapangan</p>
+          <h2 className="text-base font-bold text-[#064E3B]">Manajemen Pemesanan</h2>
+          <p className="text-xxs text-[#064E3B]/45 font-medium">Lihat, saring, dan perbarui seluruh riwayat booking lapangan</p>
         </div>
       </div>
 
       {/* Filters Panel */}
-      <div className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm flex flex-wrap gap-4 items-center">
+      <div className="bg-[#FDFBF7] border border-[#064E3B] p-4 rounded-none shadow-[4px_4px_0_#064E3B] flex flex-wrap gap-4 items-center">
         {/* Court Filter */}
         <div className="flex flex-col gap-1">
-          <span className="text-xs font-semibold text-slate-500">Filter Lapangan</span>
+          <span className="text-xs font-semibold text-[#064E3B]/65">Filter Lapangan</span>
           <select
             value={selectedCourt}
             onChange={(e) => setSelectedCourt(e.target.value)}
-            className="px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500"
+            className="px-3 py-1.5 text-xs bg-[#FDFBF7] border border-[#064E3B] rounded-none focus:outline-none focus:ring-1 focus:ring-emerald-500"
           >
             <option value="">Semua Lapangan</option>
             {courts.map((court) => (
@@ -185,11 +185,11 @@ export default function BookingList() {
 
         {/* Status Filter */}
         <div className="flex flex-col gap-1">
-          <span className="text-xs font-semibold text-slate-500">Status Booking</span>
+          <span className="text-xs font-semibold text-[#064E3B]/65">Status Booking</span>
           <select
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
-            className="px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500"
+            className="px-3 py-1.5 text-xs bg-[#FDFBF7] border border-[#064E3B] rounded-none focus:outline-none focus:ring-1 focus:ring-emerald-500"
           >
             <option value="">Semua Status</option>
             <option value="pending">Pending</option>
@@ -201,11 +201,11 @@ export default function BookingList() {
 
         {/* Payment Status Filter */}
         <div className="flex flex-col gap-1">
-          <span className="text-xs font-semibold text-slate-500">Status Pembayaran</span>
+          <span className="text-xs font-semibold text-[#064E3B]/65">Status Pembayaran</span>
           <select
             value={selectedPaymentStatus}
             onChange={(e) => setSelectedPaymentStatus(e.target.value)}
-            className="px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500"
+            className="px-3 py-1.5 text-xs bg-[#FDFBF7] border border-[#064E3B] rounded-none focus:outline-none focus:ring-1 focus:ring-emerald-500"
           >
             <option value="">Semua Pembayaran</option>
             <option value="unpaid">Belum Bayar (Unpaid)</option>
@@ -217,11 +217,11 @@ export default function BookingList() {
       </div>
 
       {/* Bookings Table Card */}
-      <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-[#FDFBF7] border border-[#064E3B] rounded-none shadow-[4px_4px_0_#064E3B] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50 border-b border-slate-100 text-xxs font-bold uppercase tracking-wider text-slate-400">
+              <tr className="bg-[#FDFBF7] border-b border-[#064E3B] text-xxs font-bold uppercase tracking-wider text-[#064E3B]/45">
                 <th className="px-5 py-3">Kode / Lapangan</th>
                 <th className="px-5 py-3">Pemain / Kontak</th>
                 <th className="px-5 py-3">Waktu Main</th>
@@ -242,28 +242,28 @@ export default function BookingList() {
                 ))
               ) : bookings.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-5 py-8 text-center text-slate-500">
+                  <td colSpan={7} className="px-5 py-8 text-center text-[#064E3B]/65">
                     Tidak ditemukan data booking yang sesuai dengan kriteria filter.
                   </td>
                 </tr>
               ) : (
                 bookings.map((booking) => (
-                  <tr key={booking.id} className="hover:bg-slate-50/50">
+                  <tr key={booking.id} className="hover:bg-[#FDFBF7]/50">
                     <td className="px-5 py-4">
-                      <span className="font-bold text-slate-800 select-all">{booking.booking_code}</span>
-                      <div className="text-xxs text-slate-400 mt-0.5">{booking.court.name}</div>
+                      <span className="font-bold text-[#064E3B] select-all">{booking.booking_code}</span>
+                      <div className="text-xxs text-[#064E3B]/45 mt-0.5">{booking.court.name}</div>
                     </td>
                     <td className="px-5 py-4">
-                      <span className="font-semibold text-slate-700">{booking.customer_name}</span>
-                      <div className="text-xxs text-slate-400 mt-0.5">{booking.customer_phone}</div>
+                      <span className="font-semibold text-[#064E3B]">{booking.customer_name}</span>
+                      <div className="text-xxs text-[#064E3B]/45 mt-0.5">{booking.customer_phone}</div>
                     </td>
                     <td className="px-5 py-4">
                       <span>{booking.start_time.split(' ')[0]}</span>
-                      <div className="text-xxs text-slate-500 font-medium mt-0.5">
+                      <div className="text-xxs text-[#064E3B]/65 font-medium mt-0.5">
                         {booking.start_time.split(' ')[1]?.substring(0, 5)} - {booking.end_time.split(' ')[1]?.substring(0, 5)}
                       </div>
                     </td>
-                    <td className="px-5 py-4 text-right font-semibold text-slate-800">
+                    <td className="px-5 py-4 text-right font-semibold text-[#064E3B]">
                       {formatRupiah(booking.price)}
                     </td>
                     <td className="px-5 py-4 text-center">
@@ -299,7 +299,7 @@ export default function BookingList() {
                           </Button>
                         )}
                         {booking.status !== 'confirmed' && booking.status !== 'pending' && (
-                          <span className="text-slate-400 text-xxs font-medium">-</span>
+                          <span className="text-[#064E3B]/45 text-xxs font-medium">-</span>
                         )}
                       </div>
                     </td>
@@ -312,14 +312,14 @@ export default function BookingList() {
 
         {/* Pagination Toolbar */}
         {lastPage > 1 && (
-          <div className="px-5 py-3.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
-            <span className="text-xxs text-slate-400 font-semibold uppercase">
+          <div className="px-5 py-3.5 bg-[#FDFBF7] border-t border-[#064E3B] flex items-center justify-between">
+            <span className="text-xxs text-[#064E3B]/45 font-semibold uppercase">
               Halaman {currentPage} dari {lastPage}
             </span>
             <div className="flex items-center gap-1.5">
               <Button
                 variant="secondary"
-                className="px-3 py-1.5 text-xs rounded-lg"
+                className="px-3 py-1.5 text-xs rounded-none"
                 disabled={currentPage <= 1 || isLoadingBookings}
                 onClick={() => setCurrentPage((prev) => prev - 1)}
                 icon={<CaretLeft size={16} />}
@@ -328,7 +328,7 @@ export default function BookingList() {
               </Button>
               <Button
                 variant="secondary"
-                className="px-3 py-1.5 text-xs rounded-lg"
+                className="px-3 py-1.5 text-xs rounded-none"
                 disabled={currentPage >= lastPage || isLoadingBookings}
                 onClick={() => setCurrentPage((prev) => prev + 1)}
                 icon={<CaretRight size={16} />}

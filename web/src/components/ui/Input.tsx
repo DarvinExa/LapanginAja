@@ -14,17 +14,17 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className="flex flex-col gap-1.5 w-full">
         <label
           htmlFor={inputId}
-          className="text-sm font-semibold text-slate-800"
+          className="text-sm font-semibold text-[#064E3B]"
         >
           {label}
         </label>
         <input
           id={inputId}
           ref={ref}
-          className={`w-full px-3 py-2 text-sm bg-white border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 ${
+          className={`w-full px-3 py-2 text-sm bg-[#FDFBF7] border rounded-none transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-[#064E3B] ${
             error
               ? 'border-rose-400 focus:border-rose-500 focus:ring-rose-500/20'
-              : 'border-slate-200 focus:border-emerald-600'
+              : 'border-[#064E3B] focus:border-[#064E3B]'
           } ${className}`}
           {...props}
         />
@@ -32,7 +32,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <span className="text-xs text-rose-600 font-medium">{error}</span>
         ) : (
           helperText && (
-            <span className="text-xs text-slate-500">{helperText}</span>
+            <span className="text-xs text-[#064E3B]/65">{helperText}</span>
           )
         )}
       </div>

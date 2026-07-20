@@ -57,18 +57,18 @@ export default function Register() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-slate-50 py-12 sm:px-6 lg:px-8 px-4">
+    <div className="flex min-h-screen flex-col justify-center bg-[#FDFBF7] py-12 sm:px-6 lg:px-8 px-4">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="text-center text-3xl font-extrabold tracking-tight text-slate-900">
+        <h2 className="text-center text-3xl font-extrabold tracking-tight text-[#064E3B]">
           Daftar Akun Baru
         </h2>
-        <p className="mt-2 text-center text-sm text-slate-600">
+        <p className="mt-2 text-center text-sm text-[#064E3B]/80">
           Mulai memesan dan mengelola lapangan olahraga Anda
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow-sm border border-slate-200 sm:rounded-xl sm:px-10">
+        <div className="bg-[#FDFBF7] py-8 px-4 shadow-[4px_4px_0_#064E3B] border border-[#064E3B] sm:rounded-none sm:px-10">
           <form className="space-y-4" onSubmit={handleSubmit}>
             <Input
               label="Nama lengkap"
@@ -101,15 +101,15 @@ export default function Register() {
             />
 
             <div className="flex flex-col gap-1.5">
-              <label className="text-sm font-semibold text-slate-800">
+              <label className="text-sm font-semibold text-[#064E3B]">
                 Tipe akun / Peran
               </label>
               <div className="grid grid-cols-2 gap-4">
                 <label
-                  className={`flex flex-col items-center justify-center p-3 rounded-lg border text-center cursor-pointer transition-all duration-200 ${
+                  className={`flex flex-col items-center justify-center p-3 rounded-none border text-center cursor-pointer transition-all duration-200 ${
                     role === 'player'
-                      ? 'border-emerald-600 bg-emerald-50/35 text-emerald-800 font-semibold'
-                      : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                      ? 'border-[#064E3B] bg-[#10B981]/20 text-[#064E3B] font-semibold'
+                      : 'border-[#064E3B] bg-[#FDFBF7] text-[#064E3B]/80 hover:bg-[#FDFBF7]'
                   }`}
                 >
                   <input
@@ -121,15 +121,15 @@ export default function Register() {
                     className="sr-only"
                   />
                   <span className="text-sm">Pemain</span>
-                  <span className="text-xxs text-slate-500 font-normal mt-0.5">
+                  <span className="text-xxs text-[#064E3B]/65 font-normal mt-0.5">
                     Memesan lapangan olahraga
                   </span>
                 </label>
                 <label
-                  className={`flex flex-col items-center justify-center p-3 rounded-lg border text-center cursor-pointer transition-all duration-200 ${
+                  className={`flex flex-col items-center justify-center p-3 rounded-none border text-center cursor-pointer transition-all duration-200 ${
                     role === 'owner'
-                      ? 'border-emerald-600 bg-emerald-50/35 text-emerald-800 font-semibold'
-                      : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
+                      ? 'border-[#064E3B] bg-[#10B981]/20 text-[#064E3B] font-semibold'
+                      : 'border-[#064E3B] bg-[#FDFBF7] text-[#064E3B]/80 hover:bg-[#FDFBF7]'
                   }`}
                 >
                   <input
@@ -141,7 +141,7 @@ export default function Register() {
                     className="sr-only"
                   />
                   <span className="text-sm">Pemilik Lapangan</span>
-                  <span className="text-xxs text-slate-500 font-normal mt-0.5">
+                  <span className="text-xxs text-[#064E3B]/65 font-normal mt-0.5">
                     Mengelola venue & bookings
                   </span>
                 </label>
@@ -169,7 +169,7 @@ export default function Register() {
             />
 
             {errors.global && (
-              <div className="rounded-lg bg-rose-50 border border-rose-100 p-3 text-xs font-semibold text-rose-700">
+              <div className="rounded-none bg-rose-50 border border-rose-100 p-3 text-xs font-semibold text-rose-700">
                 {errors.global}
               </div>
             )}
@@ -185,11 +185,11 @@ export default function Register() {
             </div>
           </form>
 
-          <div className="mt-6 border-t border-slate-100 pt-6 text-center text-xs">
-            <span className="text-slate-500">Sudah memiliki akun?</span>{' '}
+          <div className="mt-6 border-t border-[#064E3B] pt-6 text-center text-xs">
+            <span className="text-[#064E3B]/65">Sudah memiliki akun?</span>{' '}
             <Link
               to="/login"
-              className="font-semibold text-emerald-600 hover:text-emerald-700 transition-colors"
+              className="font-semibold text-[#10B981] hover:text-[#064E3B] transition-colors"
             >
               Masuk disini
             </Link>

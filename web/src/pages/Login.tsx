@@ -52,18 +52,18 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-slate-50 py-12 sm:px-6 lg:px-8 px-4">
+    <div className="flex min-h-screen flex-col justify-center bg-[#FDFBF7] py-12 sm:px-6 lg:px-8 px-4">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="text-center text-3xl font-extrabold tracking-tight text-slate-900">
+        <h2 className="text-center text-3xl font-extrabold tracking-tight text-[#064E3B]">
           Masuk ke LapanginAja
         </h2>
-        <p className="mt-2 text-center text-sm text-slate-600">
+        <p className="mt-2 text-center text-sm text-[#064E3B]/80">
           Kelola booking lapangan Anda dengan mudah
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow-sm border border-slate-200 sm:rounded-xl sm:px-10">
+        <div className="bg-[#FDFBF7] py-8 px-4 shadow-[4px_4px_0_#064E3B] border border-[#064E3B] sm:rounded-none sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <Input
               label="Alamat email"
@@ -86,14 +86,14 @@ export default function Login() {
             <div className="-mt-3 text-right">
               <Link
                 to="/forgot-password"
-                className="text-xs font-semibold text-emerald-600 hover:text-emerald-700 transition-colors"
+                className="text-xs font-semibold text-[#10B981] hover:text-[#064E3B] transition-colors"
               >
                 Lupa kata sandi?
               </Link>
             </div>
 
             {error && (
-              <div className="rounded-lg bg-rose-50 border border-rose-100 p-3 text-xs font-semibold text-rose-700">
+              <div className="rounded-none bg-rose-50 border border-rose-100 p-3 text-xs font-semibold text-rose-700">
                 {error}
               </div>
             )}
@@ -109,11 +109,11 @@ export default function Login() {
             </div>
           </form>
 
-          <div className="mt-6 border-t border-slate-100 pt-6 text-center text-xs">
-            <span className="text-slate-500">Belum punya akun?</span>{' '}
+          <div className="mt-6 border-t border-[#064E3B] pt-6 text-center text-xs">
+            <span className="text-[#064E3B]/65">Belum punya akun?</span>{' '}
             <Link
               to="/register"
-              className="font-semibold text-emerald-600 hover:text-emerald-700 transition-colors"
+              className="font-semibold text-[#10B981] hover:text-[#064E3B] transition-colors"
             >
               Daftar sekarang
             </Link>

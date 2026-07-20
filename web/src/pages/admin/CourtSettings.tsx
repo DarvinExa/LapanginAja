@@ -183,10 +183,10 @@ export default function CourtSettings() {
       {/* Title Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <TennisBall size={24} className="text-emerald-600" />
+          <TennisBall size={24} className="text-[#10B981]" />
           <div>
-            <h2 className="text-base font-bold text-slate-800">Manajemen Lapangan</h2>
-            <p className="text-xxs text-slate-400 font-medium">Kelola profil lapangan dan atur jam buka operasional harian</p>
+            <h2 className="text-base font-bold text-[#064E3B]">Manajemen Lapangan</h2>
+            <p className="text-xxs text-[#064E3B]/45 font-medium">Kelola profil lapangan dan atur jam buka operasional harian</p>
           </div>
         </div>
         
@@ -198,28 +198,28 @@ export default function CourtSettings() {
       {/* Courts list */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {courts.map((court) => (
-          <div key={court.id} className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col justify-between gap-4">
+          <div key={court.id} className="bg-[#FDFBF7] border border-[#064E3B] rounded-none p-5 shadow-[4px_4px_0_#064E3B] flex flex-col justify-between gap-4">
             <div>
               <div className="flex justify-between items-start">
-                <h3 className="font-bold text-slate-800 text-base">{court.name}</h3>
-                <span className="px-2 py-0.5 text-xxs font-bold uppercase rounded-full bg-slate-100 text-slate-600">
+                <h3 className="font-bold text-[#064E3B] text-base">{court.name}</h3>
+                <span className="px-2 py-0.5 text-xxs font-bold uppercase rounded-full bg-slate-100 text-[#064E3B]/80">
                   {court.sport_type}
                 </span>
               </div>
-              <div className="flex flex-col gap-1 mt-3 text-xs text-slate-500">
+              <div className="flex flex-col gap-1 mt-3 text-xs text-[#064E3B]/65">
                 <div>
-                  <span className="font-semibold text-slate-700">Tarif:</span> {formatRupiah(court.price_per_hour)}/jam
+                  <span className="font-semibold text-[#064E3B]">Tarif:</span> {formatRupiah(court.price_per_hour)}/jam
                 </div>
                 <div>
-                  <span className="font-semibold text-slate-700">Durasi Slot:</span> {court.slot_duration_minutes} menit
+                  <span className="font-semibold text-[#064E3B]">Durasi Slot:</span> {court.slot_duration_minutes} menit
                 </div>
               </div>
             </div>
 
-            <div className="flex gap-2 border-t border-slate-100 pt-3.5">
+            <div className="flex gap-2 border-t border-[#064E3B] pt-3.5">
               <Button
                 variant="secondary"
-                className="flex-1 py-1.5 text-xs text-slate-700"
+                className="flex-1 py-1.5 text-xs text-[#064E3B]"
                 icon={<Clock size={16} />}
                 onClick={() => handleOpenHours(court)}
               >
@@ -227,7 +227,7 @@ export default function CourtSettings() {
               </Button>
               <button
                 onClick={() => handleDeleteCourt(court.id)}
-                className="px-3 py-1.5 border border-rose-200 hover:bg-rose-50 text-rose-600 rounded-lg transition-colors cursor-pointer focus:outline-none"
+                className="px-3 py-1.5 border border-rose-200 hover:bg-rose-50 text-rose-600 rounded-none transition-colors cursor-pointer focus:outline-none"
               >
                 <Trash size={16} />
               </button>
@@ -249,11 +249,11 @@ export default function CourtSettings() {
           />
 
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-semibold text-slate-500">Jenis Olahraga</label>
+            <label className="text-xs font-semibold text-[#064E3B]/65">Jenis Olahraga</label>
             <select
               value={sportType}
               onChange={(e) => setSportType(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500"
+              className="w-full px-3 py-2 text-sm bg-[#FDFBF7] border border-[#064E3B] rounded-none focus:outline-none focus:ring-1 focus:ring-emerald-500"
             >
               <option value="Futsal">Futsal</option>
               <option value="Badminton">Badminton</option>
@@ -272,11 +272,11 @@ export default function CourtSettings() {
           />
 
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-semibold text-slate-500">Durasi Slot per Booking (Menit)</label>
+            <label className="text-xs font-semibold text-[#064E3B]/65">Durasi Slot per Booking (Menit)</label>
             <select
               value={slotDuration}
               onChange={(e) => setSlotDuration(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500"
+              className="w-full px-3 py-2 text-sm bg-[#FDFBF7] border border-[#064E3B] rounded-none focus:outline-none focus:ring-1 focus:ring-emerald-500"
             >
               <option value="30">30 Menit</option>
               <option value="60">60 Menit</option>
@@ -305,7 +305,7 @@ export default function CourtSettings() {
           <div className="flex flex-col gap-3">
             {opHours.map((hour, index) => (
               <div key={hour.day_of_week} className="flex items-center justify-between border-b border-slate-50 pb-2.5 last:border-0 gap-3">
-                <span className="text-xs font-semibold text-slate-700 w-20">
+                <span className="text-xs font-semibold text-[#064E3B] w-20">
                   {getDayLabel(hour.day_of_week)}
                 </span>
                 
@@ -315,15 +315,15 @@ export default function CourtSettings() {
                     disabled={hour.is_closed}
                     value={hour.open_time}
                     onChange={(e) => handleUpdateOpHourRow(index, 'open_time', e.target.value)}
-                    className="px-2 py-1 text-xs border border-slate-200 rounded focus:outline-none disabled:bg-slate-100"
+                    className="px-2 py-1 text-xs border border-[#064E3B] rounded focus:outline-none disabled:bg-slate-100"
                   />
-                  <span className="text-slate-400 text-xs">sampai</span>
+                  <span className="text-[#064E3B]/45 text-xs">sampai</span>
                   <input
                     type="time"
                     disabled={hour.is_closed}
                     value={hour.close_time}
                     onChange={(e) => handleUpdateOpHourRow(index, 'close_time', e.target.value)}
-                    className="px-2 py-1 text-xs border border-slate-200 rounded focus:outline-none disabled:bg-slate-100"
+                    className="px-2 py-1 text-xs border border-[#064E3B] rounded focus:outline-none disabled:bg-slate-100"
                   />
                 </div>
 
@@ -332,7 +332,7 @@ export default function CourtSettings() {
                     type="checkbox"
                     checked={hour.is_closed}
                     onChange={(e) => handleUpdateOpHourRow(index, 'is_closed', e.target.checked)}
-                    className="rounded text-emerald-600 focus:ring-emerald-500 h-3.5 w-3.5"
+                    className="rounded text-[#10B981] focus:ring-emerald-500 h-3.5 w-3.5"
                   />
                   <span className="text-xxs font-bold text-rose-600">Tutup</span>
                 </label>
@@ -340,7 +340,7 @@ export default function CourtSettings() {
             ))}
           </div>
 
-          <div className="pt-2 flex justify-end gap-2 border-t border-slate-100 pt-3">
+          <div className="pt-2 flex justify-end gap-2 border-t border-[#064E3B] pt-3">
             <Button variant="secondary" type="button" onClick={() => setIsHoursModalOpen(false)}>
               Batal
             </Button>

@@ -56,19 +56,19 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-slate-50 py-12 sm:px-6 lg:px-8 px-4">
+    <div className="flex min-h-screen flex-col justify-center bg-[#FDFBF7] py-12 sm:px-6 lg:px-8 px-4">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center flex flex-col items-center gap-2">
-        <LockOpen size={48} className="text-emerald-600 animate-bounce" weight="fill" />
-        <h2 className="text-center text-3xl font-extrabold tracking-tight text-slate-900">
+        <LockOpen size={48} className="text-[#10B981] animate-bounce" weight="fill" />
+        <h2 className="text-center text-3xl font-extrabold tracking-tight text-[#064E3B]">
           Ubah Kata Sandi
         </h2>
-        <p className="mt-2 text-center text-sm text-slate-600">
+        <p className="mt-2 text-center text-sm text-[#064E3B]/80">
           Masukkan kode verifikasi yang Anda terima beserta kata sandi baru Anda.
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow-sm border border-slate-200 sm:rounded-xl sm:px-10">
+        <div className="bg-[#FDFBF7] py-8 px-4 shadow-[4px_4px_0_#064E3B] border border-[#064E3B] sm:rounded-none sm:px-10">
           <form className="space-y-4" onSubmit={handleSubmit}>
             <Input
               label="Alamat Email"
@@ -109,7 +109,7 @@ export default function ResetPassword() {
             />
 
             {error && (
-              <div className="rounded-lg bg-rose-50 border border-rose-100 p-3 text-xs font-semibold text-rose-700">
+              <div className="rounded-none bg-rose-50 border border-rose-100 p-3 text-xs font-semibold text-rose-700">
                 {error}
               </div>
             )}
@@ -123,10 +123,10 @@ export default function ResetPassword() {
             </Button>
           </form>
 
-          <div className="mt-6 border-t border-slate-100 pt-6 text-center text-xs">
+          <div className="mt-6 border-t border-[#064E3B] pt-6 text-center text-xs">
             <Link
               to="/login"
-              className="font-semibold text-emerald-600 hover:text-emerald-700 transition-colors"
+              className="font-semibold text-[#10B981] hover:text-[#064E3B] transition-colors"
             >
               Batal dan Kembali Masuk
             </Link>

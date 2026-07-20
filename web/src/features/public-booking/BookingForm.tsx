@@ -59,7 +59,7 @@ export const BookingForm: React.FC<BookingFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <h3 className="text-sm font-semibold text-slate-800">Data Pemesan</h3>
+      <h3 className="text-sm font-semibold text-[#064E3B]">Data Pemesan</h3>
 
       <Input
         label="Nama lengkap"
@@ -94,14 +94,14 @@ export const BookingForm: React.FC<BookingFormProps> = ({
       </div>
 
       <div className="flex flex-col gap-1.5 w-full">
-        <label className="text-sm font-semibold text-slate-800">
+        <label className="text-sm font-semibold text-[#064E3B]">
           Catatan tambahan (opsional)
         </label>
         <textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           rows={3}
-          className="w-full px-3 py-2 text-sm bg-white border border-slate-200 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600"
+          className="w-full px-3 py-2 text-sm bg-[#FDFBF7] border border-[#064E3B] rounded-none transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-[#064E3B]"
           placeholder="Tulis catatan tambahan untuk pengelola..."
         />
       </div>

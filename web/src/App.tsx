@@ -27,7 +27,7 @@ function App() {
     <ToastProvider>
       <AuthProvider>
         <BrowserRouter>
-          <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
+          <div className="min-h-screen bg-[#FDFBF7] text-[#064E3B] font-sans">
             <Routes>
               {/* Public Marketing Routes */}
               <Route path="/" element={<Home />} />
