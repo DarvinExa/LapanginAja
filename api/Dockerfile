@@ -1,4 +1,4 @@
-FROM php:8.2-cli
+FROM php:8.2.35-cli
 
 # System libraries and PHP extensions required by Laravel, PostgreSQL, DomPDF, and QR code.
 RUN apt-get update && apt-get install -y \

@@ -106,7 +106,7 @@ class WebhookController extends Controller
                 ]);
 
                 // Dispatch notification job
-                SendBookingNotifications::dispatch($booking);
+                SendBookingNotifications::dispatchSync($booking);
             } elseif (in_array($transactionStatus, ['expire', 'cancel', 'deny'])) {
                 // Payment failed/cancelled
                 $payment->update([
